@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
-import { Card, Flex, Spinner, Text, Link } from "@theme-ui/components";
-import OrderContext from "../../context/order-context";
-import ProductSelection from "../product-selection";
-import OrderCompleter from "../order-completer";
-import Logo from "./logo";
+import React, { useContext, useMemo } from "react"
+import { Card, Flex, Spinner, Text, Link } from "@theme-ui/components"
+import OrderContext from "../../context/order-context"
+import ProductSelection from "../product-selection"
+import OrderCompleter from "../order-completer"
+import Logo from "./logo"
 
-const Layout = ({ product }) => {
-  const { cart } = useContext(OrderContext);
+const Layout = ({ product, regions, country, regionId }) => {
+  const { cart } = useContext(OrderContext)
+
+  const selectedRegion = useMemo(() => {
+    return regions.find((r) => r.id === regionId)
+  }, [regions, regionId])
 
   return (
     <Flex
@@ -35,9 +39,14 @@ const Layout = ({ product }) => {
         {product ? (
           <>
             {cart.items < 1 ? (
-              <ProductSelection product={product} />
+              <ProductSelection
+                product={product}
+                regions={regions}
+                region={selectedRegion}
+                country={country}
+              />
             ) : (
-              <OrderCompleter />
+              <OrderCompleter country={country} region={selectedRegion} />
             )}
           </>
         ) : (
@@ -62,7 +71,7 @@ const Layout = ({ product }) => {
         </Link>
       </Text>
     </Flex>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

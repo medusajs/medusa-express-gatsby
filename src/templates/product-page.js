@@ -3,12 +3,21 @@ import { graphql } from "gatsby";
 import { OrderProvider } from "../context/order-context";
 import Layout from "../components/layout";
 
-const ProductPage = ({ data }) => {
+const ProductPage = ({ data, pageContext }) => {
   const product = data.medusaProduct;
+
+  const regions = data.allMedusaRegion.edges.map(({ node }) => {
+    return node;
+  });
 
   return (
     <OrderProvider>
-      <Layout product={product} />
+      <Layout 
+        product={product}
+        regions={regions}
+        country={pageContext.country}
+        regionId={pageContext.region_id}
+       />
     </OrderProvider>
   );
 };
@@ -63,6 +72,21 @@ export const query = graphql`
         product_id
         title
         updated_at
+      }
+    }
+
+    allMedusaRegion {
+      edges {
+        node {
+          id
+          name
+          tax_rate
+          currency_code
+          countries {
+            display_name
+            iso_2
+          }
+        }
       }
     }
   }
