@@ -3,7 +3,7 @@ export function formatMoney(moneyAmount, digits = 2, taxRate = 0) {
 
   return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: moneyAmount.currencyCode,
+    currency: moneyAmount.currency_code,
     minimumFractionDigits: digits,
   }).format((moneyAmount.amount / 100) * (1 + taxRate / 100));
 }

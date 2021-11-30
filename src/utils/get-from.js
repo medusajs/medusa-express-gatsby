@@ -12,7 +12,7 @@ export const getFrom = (
   }
   const min = Math.min(...prices);
 
-  return `From ${
+  return `${
     (min / 100) * (1 + tax_rate / 100)
   } ${currency_code.toUpperCase()}`;
 };
