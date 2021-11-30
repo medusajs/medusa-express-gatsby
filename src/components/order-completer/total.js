@@ -10,10 +10,13 @@ const Total = () => {
       sx={{
         justifyContent: "space-between",
         mt: "1em",
+        mb: '1.25em',
+        pb: '1em',
+        borderBottom: '1px solid black'
       }}
     >
       <Text>Total</Text>
-      <Text>
+      <Text sx={{fontWeight: 600}}>
         {(cart.total / 100) * (1 + cart.region.tax_rate / 100)}{" "}
         {cart.region.currency_code.toUpperCase()}
       </Text>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, Text, Button, Flex } from "@theme-ui/components";
 import Field from "./field";
 import SelectCountry from "./select-country";
@@ -6,16 +6,22 @@ import OrderContext from "../../../context/order-context";
 import SelectShipping from "./select-shipping";
 import FieldSplitter from "./field-splitter";
 
-const Delivery = ({ formik, isValid, setIsValid }) => {
+const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
   const { delivery } = useContext(OrderContext);
+  console.log(country)
 
+  useEffect(() => {
+    formik.setFieldValue("delivery.country_code", country);
+  }, country);
+  
   return (
     <Box as="form">
       <Text
         as="h3"
         sx={{
           mb: "1em",
-          fontSize: "1em",
+          fontSize: "1.1em",
+          fontWeight: 550,
         }}
       >
         Delivery
@@ -49,19 +55,31 @@ const Delivery = ({ formik, isValid, setIsValid }) => {
               />
             }
           />
-          <SelectCountry
+          {/* <SelectCountry
             formik={formik}
             placeholder={"Country"}
             value={formik.values.delivery.country_code}
             name={"country_code"}
             set={"delivery"}
-          />
+          /> */}
+          <Text
+            mt={4}
+            as="h3"
+            sx={{
+              mb: "1em",
+              fontSize: "1.1em",
+              fontWeight: 550,
+            }}
+          >
+            Shipping options
+          </Text>
           <SelectShipping
             formik={formik}
             placeholder={"Select shipping method"}
             value={formik.values.delivery.shipping_option}
             name={"shipping_option"}
             set={"delivery"}
+            region={region}
           />
         </>
       ) : (

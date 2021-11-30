@@ -8,6 +8,7 @@ const ProductDisplay = ({ product }) => {
       <Image
         sx={{
           maxWidth: "280px",
+          maxHeight: "280px",
           height: "auto",
           objectFit: "contain",
           objectPosition: "center center",

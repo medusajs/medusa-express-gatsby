@@ -1,9 +1,9 @@
 import React, { useContext, useMemo } from "react"
-import { Card, Flex, Spinner, Text, Link } from "@theme-ui/components"
+import { Card, Flex, Box, Spinner, Text, Link } from "@theme-ui/components"
 import OrderContext from "../../context/order-context"
 import ProductSelection from "../product-selection"
 import OrderCompleter from "../order-completer"
-import Logo from "./logo"
+import Logo, { SmallLogo }  from "./logo" 
 
 const Layout = ({ product, regions, country, regionId }) => {
   const { cart } = useContext(OrderContext)
@@ -13,63 +13,85 @@ const Layout = ({ product, regions, country, regionId }) => {
   }, [regions, regionId])
 
   return (
-    <Flex
-      sx={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: "column",
-        minHeight: "100vh",
-        p: "2em",
-      }}
-    >
-      <Logo />
-      <Card
-        variant="container"
+    <Flex sx={{ widht: "100%", flexDirection: "column" }}>
+      <Flex
         sx={{
-          bg: "white",
-          my: "2em",
-          width: cart.items < 1 ? "800px" : "500px",
-          height: cart.items < 1 ? "400px" : "auto",
-          p: "1.5em",
-          borderRadius: "8px",
-          justifyContent: "center",
-          transition: "all .2s linear",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "column",
+          minHeight: "90vh",
+          p: "2em",
         }}
       >
-        {product ? (
-          <>
-            {cart.items < 1 ? (
-              <ProductSelection
-                product={product}
-                regions={regions}
-                region={selectedRegion}
-                country={country}
-              />
-            ) : (
-              <OrderCompleter country={country} region={selectedRegion} />
-            )}
-          </>
-        ) : (
-          <Spinner />
-        )}
-      </Card>
-      <Text
-        sx={{
-          fontWeight: "500",
-          color: "medusa100",
-        }}
-      >
-        Learn more about{" "}
-        <Link
+        <Logo />
+        <Card
+          variant="container"
           sx={{
-            textDecoration: "none",
-            color: "medusa100",
+            bg: "white",
+            my: "2em",
+            width: "700px", //cart.items < 1 ? "800px" : "500px",
+            height: "auto", //cart.items < 1 ? "400px" :
+            p: "1.5em",
+            borderRadius: "8px",
+            justifyContent: "center",
+            transition: "all .2s linear",
           }}
-          href="https://www.medusa-commerce.com/"
         >
-          Medusa
-        </Link>
-      </Text>
+          {product ? (
+            <>
+              {cart.items < 1 ? (
+                <ProductSelection
+                  product={product}
+                  regions={regions}
+                  region={selectedRegion}
+                  country={country}
+                />
+              ) : (
+                <OrderCompleter country={country} region={selectedRegion} />
+              )}
+            </>
+          ) : (
+            <Spinner />
+          )}
+        </Card>
+        <Flex></Flex>
+      </Flex>
+      <Flex
+        sx={{
+          justifyContent: "center",
+          paddingTop: "10px",
+          width: "100%",
+          height: "100px",
+          backgroundColor: "#F3F3F6",
+        }}
+      >
+        <Flex sx={{ paddingTop: '10px', flexDirection: "column", alignItems: "center" }}>
+          <Text
+            sx={{
+              fontWeight: "500",
+              fontSize: "0.7em",
+              color: "#A3A3A3",
+              letterSpacing: '4px'
+            }}
+          >
+            POWERED BY
+          </Text>
+          <Flex sx={{paddingTop: '10px', alignItems: 'center'}}>
+            <SmallLogo />
+              <Link
+                sx={{
+                  textDecoration: "none",
+                  color: "medusa100",
+                }}
+                href="https://www.medusa-commerce.com/"
+              >
+            <Text sx={{color: '#A3A3A3', fontWeight: 500, fontSize: '1.2em'}} >
+                Medusa
+            </Text>
+              </Link>
+          </Flex>
+        </Flex>
+      </Flex>
     </Flex>
   )
 }

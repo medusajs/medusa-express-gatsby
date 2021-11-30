@@ -19,7 +19,7 @@ const SelectCountry = ({ formik, value, name, set, placeholder }) => {
         mb: ".75em",
       }}
     >
-      <Select
+      {/* <Select
         name={`${set}.${name}`}
         value={value}
         onChange={formik.handleChange}
@@ -37,7 +37,7 @@ const SelectCountry = ({ formik, value, name, set, placeholder }) => {
             </option>
           );
         })}
-      </Select>
+      </Select> */}
     </Box>
   );
 };

@@ -10,10 +10,11 @@ const Contact = ({ formik, isValid, setIsValid }) => {
   return (
     <Box as="form">
       <Text
-        as="h3"
+        as="h2"
         sx={{
           mb: "1em",
-          fontSize: "1em",
+          fontSize: "1.1em",
+          fontWeight: 550,
         }}
       >
         Contact

@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react"
 import { Flex, Text, Box } from "@theme-ui/components"
-import { navigate } from "gatsby";
+import { navigate } from "gatsby"
 
 import OrderContext from "../../context/order-context"
 import Review from "./review"
 import Total from "./total"
 import Forms from "./forms"
+import BreadCrumbs from "../breadcrumbs"
 
 const OrderCompleter = ({ country, region }) => {
   const { cart, order, orderStatus } = useContext(OrderContext)
@@ -55,17 +56,15 @@ const OrderCompleter = ({ country, region }) => {
       >
         Your order
       </Text>
-      <Review />
-      <Total />
-      <Box
-        sx={{
-          height: "1px",
-          bg: "cool",
-          width: "100%",
-          my: "1em",
-        }}
-      />
-      <Forms />
+      <Flex pt={3} pb={4}>
+        <BreadCrumbs
+          step={1}
+          sx={{
+            alignItems: "center",
+          }}
+        />
+      </Flex>
+      <Forms region={region} country={country} />
     </Flex>
   )
 }
