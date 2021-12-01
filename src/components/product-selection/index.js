@@ -42,7 +42,11 @@ const ProductSelection = ({ product, region, regions, country }) => {
       </Flex>
       <Text variant="header3">{product.title}</Text>
       <Flex mt={4}>
-        <ProductDisplay region={region} product={product} />
+        <ProductDisplay
+          showSpinner={status === "creating_cart"}
+          region={region}
+          product={product}
+        />
       </Flex>
       <Flex
         my={3}

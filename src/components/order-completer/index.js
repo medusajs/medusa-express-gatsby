@@ -50,8 +50,21 @@ const OrderCompleter = ({ country, region }) => {
         flexDirection: "column",
       }}
     >
-      {order ? (
-        <Spinner done={done} />
+      {showSpinner ? (
+        <Flex
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            minWidth: ["200px", "500px"],
+            height: "100%",
+            minHeight: ["150px", "200px"],
+          }}
+        >
+          <Spinner done={done} />
+        </Flex>
+      ) : order ? (
+        <OrderConfirmation order={order} />
       ) : (
         <>
           <Flex pt={3} pb={4}>

@@ -5,13 +5,7 @@ import ProductSelection from "../product-selection"
 import OrderCompleter from "../order-completer"
 import Logo, { MedusaLogo, LogoText } from "./logo"
 
-const Layout = ({ product, regions, country, regionId, children }) => {
-  const { cart } = useContext(OrderContext)
-
-  const selectedRegion = useMemo(() => {
-    return regions.find((r) => r.id === regionId)
-  }, [regions, regionId])
-
+const LayoutTest = ({ children }) => {
   return (
     <Flex sx={{ widht: "100%", flexDirection: "column" }}>
       <Flex
@@ -88,4 +82,4 @@ const Layout = ({ product, regions, country, regionId, children }) => {
   )
 }
 
-export default Layout
+export default LayoutTest

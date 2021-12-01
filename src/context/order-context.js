@@ -16,6 +16,7 @@ const actions = {
   SET_SHIPPING: "SET_SHIPPING",
   SET_ORDER: "SET_ORDER",
   SET_ORDER_STATUS: "SET_ORDER_STATUS",
+  SET_STATUS: "SET_STATUS",
 }
 
 export const defaultOrderContext = {
@@ -77,7 +78,11 @@ const reducer = (state, action) => {
         ...state,
         contact: action.payload,
       }
-
+    case actions.SET_STATUS:
+      return {
+        ...state,
+        status: action.payload,
+      }
     case actions.SET_ORDER:
       return {
         ...state,
@@ -142,27 +147,6 @@ export const OrderProvider = ({ children }) => {
     fetchOptions()
   }, [state.cart.id])
 
-  // useEffect(() => {
-  //   const retrieveCart = async () => {
-  //     const id = localStorage.getItem("cart_id")
-
-  //     const cart = await client.carts
-  //       .retrieve(id)
-  //       .then(({ cart }) => cart)
-  //       .catch((_) => undefined)
-
-  //     if (cart) {
-  //       dispatch({ type: actions.SET_CART, payload: cart })
-  //     } else {
-  //       localStorage.removeItem("cart_id")
-  //     }
-  //   }
-
-  //   if (localStorage) {
-  //     retrieveCart()
-  //   }
-  // }, [])
-
   const completeOrder = async () => {
     if (state.cart && state.cart.id) {
       dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
@@ -205,6 +189,7 @@ export const OrderProvider = ({ children }) => {
     const { variant, quantity } = state
 
     if (variant.id) {
+      dispatch({ type: actions.SET_STATUS, payload: "creating_cart" })
       const { id } = await client.carts
         .create({
           region_id: region,
@@ -220,6 +205,8 @@ export const OrderProvider = ({ children }) => {
       const cart = await client.carts
         .createPaymentSessions(id)
         .then(({ cart }) => cart)
+
+      dispatch({ type: actions.SET_STATUS, payload: "cart_created" })
 
       dispatch({ type: actions.SET_CART, payload: cart })
     }

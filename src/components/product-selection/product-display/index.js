@@ -1,10 +1,27 @@
 import React from "react"
 import { Flex, Image } from "@theme-ui/components"
 import Info from "./info"
+import Spinner from "../../order-completer/spinner"
 
-const ProductDisplay = ({ region, product }) => {
+const ProductDisplay = ({ showSpinner, region, product }) => {
   return product ? (
     <Flex>
+      {showSpinner && (
+        <Flex
+          sx={{
+            position: "absolute",
+            bg: "#ffffffaa",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spinner />
+        </Flex>
+      )}
       <Image
         sx={{
           maxWidth: "280px",

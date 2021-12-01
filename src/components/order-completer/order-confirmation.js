@@ -1,14 +1,15 @@
-import React from "react";
-import { Image, Flex, Text } from "@theme-ui/components";
+import React from "react"
+import { Image, Flex, Text } from "@theme-ui/components"
+import Review from "./review"
 
 const OrderConfirmation = ({ order }) => {
-  console.log(order);
+  console.log(order)
   return (
-    <Flex>
+    <Flex sx={{ flexDirection: "column" }}>
       <Flex>#{order.display_id}</Flex>
       <Flex>
         {order.items.map((i) => {
-          <Flex key={i.id}>
+          ;<Flex key={i.id}>
             <Image
               sx={{
                 height: ["150px", "200px"],
@@ -22,7 +23,7 @@ const OrderConfirmation = ({ order }) => {
                 {i.quantity} x {i.unit_price}
               </Text>
             </Flex>
-          </Flex>;
+          </Flex>
         })}
       </Flex>
       <Flex>
@@ -30,7 +31,7 @@ const OrderConfirmation = ({ order }) => {
         <Text>{order.total}</Text>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default OrderConfirmation;
+export default OrderConfirmation

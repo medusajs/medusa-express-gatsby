@@ -1,5 +1,5 @@
-import React from "react";
-import { Box } from "@theme-ui/components";
+import React from "react"
+import { Box } from "@theme-ui/components"
 
 const Spinner = ({ done }) => {
   if (done) {
@@ -26,7 +26,7 @@ const Spinner = ({ done }) => {
           <path d="M11 32L24.4101 49L53 15" stroke="#454545" stroke-width="3" />
         </Box>
       </Box>
-    );
+    )
   }
 
   const inside = {
@@ -49,8 +49,9 @@ const Spinner = ({ done }) => {
     ":nth-child(3)": {
       animationDelay: "-0.15s",
     },
-  };
+  }
 
+  console.log("spinning")
   return (
     <Box
       sx={{
@@ -64,7 +65,7 @@ const Spinner = ({ done }) => {
       <Box sx={inside} />
       <Box sx={inside} />
     </Box>
-  );
-};
+  )
+}
 
-export default Spinner;
+export default Spinner

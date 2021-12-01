@@ -4,7 +4,7 @@ import { Card, Flex, Text, Link } from "@theme-ui/components"
 import { client } from "../../utils/client"
 
 import OrderConfirmation from "../order-completer/order-confirmation"
-
+import LayoutTest from "./layout"
 import Logo from "./logo"
 
 const Layout = () => {
@@ -21,26 +21,8 @@ const Layout = () => {
   }
 
   return (
-    <Flex
-      sx={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: "column",
-        minHeight: "100vh",
-        pt: "2em",
-      }}
-    >
-      <Logo />
-      <Card
-        sx={{
-          bg: "white",
-          p: "24px",
-          justifyContent: "center",
-          transition: "all .2s linear",
-        }}
-      >
-        <OrderConfirmation order={order} />
-      </Card>
+    <LayoutTest>
+      <OrderConfirmation order={order} />
       <Flex
         sx={{
           flexDirection: ["column", "row"],
@@ -97,7 +79,7 @@ const Layout = () => {
           </Link>
         </Flex>
       </Flex>
-    </Flex>
+    </LayoutTest>
   )
 }
 
