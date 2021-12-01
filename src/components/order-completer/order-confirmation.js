@@ -8,7 +8,6 @@ const OrderConfirmation = ({ order }) => {
   const [country, setCountry] = useState(undefined)
 
   client.regions.retrieve(order.region_id).then(({ region }) => {
-    console.log(region)
     const res = region.countries.find(
       (c) => c.iso_2 === order.shipping_address.country_code
     ).name

@@ -12,19 +12,12 @@ const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
     formik.setFieldValue("delivery.country_code", country)
   }, [country])
 
-  // const fullCountry = useMemo(
-  //   () => region.countries.find((c) => c.iso_2 === country),
-  //   [country, region]
-  // ).display_name
-
   useEffect(() => {
     setFullCountry(
       region.countries.find((c) => c.iso_2 === country).display_name
     )
     setCountryName(fullCountry)
   }, [country, region])
-
-  // const fullCountry = "test"
 
   return (
     <Box as="form">

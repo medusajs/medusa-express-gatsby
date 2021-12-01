@@ -57,7 +57,6 @@ const Forms = ({ country, region }) => {
       }),
     }),
     onSubmit: async (values) => {
-      console.log("submitting")
       setIsValid({ delivery: true, contact: true })
       setDelivery(values.delivery)
       setContact(values.contact)

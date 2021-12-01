@@ -9,7 +9,6 @@ const Review = () => {
     return cart.items[0]
   }, [cart.items])
 
-  console.log(item.variant)
   return (
     <Flex
       sx={{

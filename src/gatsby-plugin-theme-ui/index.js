@@ -30,7 +30,6 @@ const theme = {
       bg: "primary",
       color: "white",
       fontWeight: "500",
-      // p: "6px, 8px, 6px, 8px",
       height: "30px",
       display: "flex",
       alignItems: "center",
@@ -95,7 +94,6 @@ const theme = {
       color: "medusa100",
     },
     confirmationHeading: {
-      // fontSize: "0.8em",
       lineHeight: "1.8em",
     },
     confirmationText: {

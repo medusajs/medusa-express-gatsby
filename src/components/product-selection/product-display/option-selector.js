@@ -49,7 +49,6 @@ const OptionSelector = ({ product }) => {
         const { id } = options.find((o) => o.id === option.option_id)
         optionSet[id] = option.value
       }
-      // optionSet["id"] = variant.id
       optionSet["variant"] = variant
       set.push(optionSet)
     }

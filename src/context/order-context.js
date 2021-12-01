@@ -240,7 +240,6 @@ export const OrderProvider = ({ children }) => {
   }
 
   const destroyCart = () => {
-    console.log("destroy cart")
     dispatch({ type: actions.DESTROY_CART })
   }
 
