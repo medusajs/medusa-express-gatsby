@@ -34,7 +34,7 @@ exports.sourceNodes = async ({
     })
   }
 
-  const { regions } = await client.regions.list();
+  const { regions } = await client.regions.list()
 
   for (const region of regions) {
     createNode({
@@ -44,7 +44,7 @@ exports.sourceNodes = async ({
         type: "MedusaRegion",
         contentDigest: createContentDigest(region),
       },
-    });
+    })
   }
 }
 
@@ -88,7 +88,6 @@ exports.createPages = async function ({ actions, graphql }) {
 
       data.allMedusaRegion.edges.forEach((edge) => {
         const { id: regionId, countries } = edge.node
-        console.log(countries)
         for (const { iso_2 } of countries) {
           actions.createPage({
             path: `/${iso_2}/${handle}`,
