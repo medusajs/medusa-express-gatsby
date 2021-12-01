@@ -81,7 +81,6 @@ const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
     >
       <Flex sx={{ flexWrap: "wrap" }}>
         {shipping.map((s) => {
-          console.log(s.id)
           const res = cart.shipping_methods.find(
             (so) => s.id === so.shipping_option_id
           )
