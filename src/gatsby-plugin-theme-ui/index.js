@@ -27,7 +27,7 @@ const theme = {
   buttons: {
     cta: {
       bg: "deepBlue",
-      color: "medusaGreen",
+      color: "white",
       fontWeight: "500",
       p: "6px, 8px, 6px, 8px",
       height: "30px",

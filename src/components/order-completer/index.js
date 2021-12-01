@@ -48,14 +48,6 @@ const OrderCompleter = ({ country, region }) => {
         flexDirection: "column",
       }}
     >
-      <Text
-        as="h2"
-        sx={{
-          mb: "1em",
-        }}
-      >
-        Your order
-      </Text>
       <Flex pt={3} pb={4}>
         <BreadCrumbs
           step={1}
