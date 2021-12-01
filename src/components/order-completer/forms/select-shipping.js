@@ -73,8 +73,6 @@ const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
     setAdded("")
   }
 
-  console.log(cart.shipping_methods)
-  console.log(shipping)
   return (
     <Box
       sx={{
