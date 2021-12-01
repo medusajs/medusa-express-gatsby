@@ -1,17 +1,15 @@
 import React, { useContext, useState, useEffect } from "react"
-import { Flex, Text, Box } from "@theme-ui/components"
+import { Flex } from "@theme-ui/components"
 import { navigate } from "gatsby"
 
 import OrderContext from "../../context/order-context"
-import Review from "./review"
-import Total from "./total"
 import Forms from "./forms"
 import BreadCrumbs from "../breadcrumbs"
 import OrderConfirmation from "./order-confirmation"
 import Spinner from "./spinner"
 
 const OrderCompleter = ({ country, region }) => {
-  const { cart, order, orderStatus } = useContext(OrderContext)
+  const { order, orderStatus } = useContext(OrderContext)
 
   const [showSpinner, setShowSpinner] = useState(false)
   const [done, setDone] = useState(false)
@@ -50,34 +48,34 @@ const OrderCompleter = ({ country, region }) => {
         flexDirection: "column",
       }}
     >
-      {showSpinner ? (
+      {(showSpinner || order) && (
         <Flex
           sx={{
+            position: "absolute",
+            bg: "#ffffffaa",
+            top: 0,
+            left: 0,
+            zIndex: 10,
+            width: "100%",
+            height: "100%",
             justifyContent: "center",
             alignItems: "center",
-            width: "100%",
-            minWidth: ["200px", "500px"],
-            height: "100%",
-            minHeight: ["150px", "200px"],
           }}
         >
-          <Spinner done={done} />
+          <Spinner />
         </Flex>
-      ) : order ? (
-        <OrderConfirmation order={order} />
-      ) : (
-        <>
-          <Flex pt={3} pb={4}>
-            <BreadCrumbs
-              step={1}
-              sx={{
-                alignItems: "center",
-              }}
-            />
-          </Flex>
-          <Forms region={region} country={country} />
-        </>
       )}
+      <>
+        <Flex pt={3} pb={4}>
+          <BreadCrumbs
+            step={1}
+            sx={{
+              alignItems: "center",
+            }}
+          />
+        </Flex>
+        <Forms region={region} country={country} />
+      </>
     </Flex>
   )
 }

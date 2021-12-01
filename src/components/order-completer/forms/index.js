@@ -10,9 +10,15 @@ import Total from "../total"
 import Review from "../review"
 
 const Forms = ({ country, region }) => {
-  const { contact, delivery, setDelivery, setContact, setDetails } = useContext(
-    OrderContext
-  )
+  const {
+    contact,
+    delivery,
+    setDelivery,
+    setContact,
+    setDetails,
+    setCountryName,
+  } = useContext(OrderContext)
+
   const [isValid, setIsValid] = useState({
     contact: false,
     delivery: false,
@@ -89,7 +95,6 @@ const Forms = ({ country, region }) => {
           <Button
             onClick={(e) => {
               e.preventDefault()
-              console.log(formik.errors)
               formik.submitForm()
             }}
             variant="cta"

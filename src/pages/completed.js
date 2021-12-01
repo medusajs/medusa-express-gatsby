@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import CompletedLayout from "../components/layout/completed-layout";
+import React from "react"
+import CompletedLayout from "../components/layout/completed-layout"
 
-const CompletedPage = () => {
-  return <CompletedLayout />;
-};
+const CompletedPage = ({ location }) => {
+  console.log(location)
+  return <CompletedLayout />
+}
 
-export default CompletedPage;
+export default CompletedPage

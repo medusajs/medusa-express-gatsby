@@ -1,17 +1,30 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Box, Text, Button, Flex } from "@theme-ui/components"
 import Field from "./field"
-import SelectCountry from "./select-country"
 import OrderContext from "../../../context/order-context"
 import SelectShipping from "./select-shipping"
 import FieldSplitter from "./field-splitter"
 
 const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
-  const { delivery } = useContext(OrderContext)
-
+  const { delivery, setCountryName } = useContext(OrderContext)
+  const [fullCountry, setFullCountry] = useState("")
   useEffect(() => {
     formik.setFieldValue("delivery.country_code", country)
-  }, country)
+  }, [country])
+
+  // const fullCountry = useMemo(
+  //   () => region.countries.find((c) => c.iso_2 === country),
+  //   [country, region]
+  // ).display_name
+
+  useEffect(() => {
+    setFullCountry(
+      region.countries.find((c) => c.iso_2 === country).display_name
+    )
+    setCountryName(fullCountry)
+  }, [country, region])
+
+  // const fullCountry = "test"
 
   return (
     <Box as="form">
@@ -22,7 +35,7 @@ const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
         }}
         variant="subheading"
       >
-        Delivery
+        Delivery to {fullCountry}
       </Text>
       {!isValid.delivery ? (
         <>
@@ -87,7 +100,7 @@ const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
           >
             <Text variant="summary">{delivery.address_1}</Text>
             <Text variant="summary">{`${delivery.postal_code}, ${delivery.city}`}</Text>
-            <Text variant="summary">{delivery.country_code.toUpperCase()}</Text>
+            <Text variant="summary">{fullCountry}</Text>
           </Flex>
           <Button
             variant="edit"

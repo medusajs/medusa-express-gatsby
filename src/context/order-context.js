@@ -7,6 +7,7 @@ const actions = {
   CREATE_CART: "CREATE_CART",
   DESTROY_CART: "DESTROY_CART",
   SET_REGION: "SET_REGION",
+  SET_COUNTRY: "SET_COUNTRY",
   SET_VARIANT: "SET_VARIANT",
   UPDATE_QUANTITY: "UPDATE_QUANTITY",
   SET_CONTACT: "SET_CONTACT",
@@ -26,6 +27,7 @@ export const defaultOrderContext = {
   },
   variantId: null,
   quantity: 1,
+  countryName: undefined,
   cart: {
     items: [],
   },
@@ -62,6 +64,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedRegion: action.payload,
+      }
+    case actions.SET_COUNTRY:
+      return {
+        ...state,
+        countryName: action.payload,
       }
     case actions.UPDATE_QUANTITY:
       return {
@@ -173,6 +180,14 @@ export const OrderProvider = ({ children }) => {
     }
   }
 
+  const setOrderCompleting = () => {
+    dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+  }
+
+  const setCountryName = (countryName) => {
+    dispatch({ type: actions.SET_COUNTRY, payload: countryName })
+  }
+
   const selectRegion = (region) => {
     dispatch({ type: actions.SET_REGION, payload: region })
   }
@@ -267,8 +282,10 @@ export const OrderProvider = ({ children }) => {
         ...state,
         clearContact,
         setContact,
+        setCountryName,
         destroyCart,
         setDelivery,
+        setOrderCompleting,
         createCart,
         selectRegion,
         selectVariant,

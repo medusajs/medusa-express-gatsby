@@ -15,7 +15,6 @@ const Layout = ({ product, regions, country, regionId }) => {
 
   return (
     <LayoutTest>
-      <LogoText />
       {product ? (
         <>
           {cart.items < 1 ? (

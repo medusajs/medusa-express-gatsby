@@ -1,7 +1,7 @@
 import React from "react"
 import { Box } from "@theme-ui/components"
 
-const Spinner = ({ done }) => {
+const Spinner = ({ done = false }) => {
   if (done) {
     return (
       <Box
@@ -23,7 +23,7 @@ const Spinner = ({ done }) => {
             animation: "dash 5s linear forwards",
           }}
         >
-          <path d="M11 32L24.4101 49L53 15" stroke="#454545" stroke-width="3" />
+          <path d="M11 32L24.4101 49L53 15" stroke="#454545" strokeWidth="3" />
         </Box>
       </Box>
     )
@@ -49,9 +49,16 @@ const Spinner = ({ done }) => {
     ":nth-child(3)": {
       animationDelay: "-0.15s",
     },
+    "@keyframes lds-ring": {
+      from: {
+        transform: "rotate(0deg)",
+      },
+      to: {
+        transform: "rotate(360deg)",
+      },
+    },
   }
 
-  console.log("spinning")
   return (
     <Box
       sx={{

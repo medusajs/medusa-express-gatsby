@@ -1,33 +1,10 @@
 import { Select, Flex, Text } from "@theme-ui/components"
 import { navigate } from "gatsby"
-import React, { useContext, useEffect, useState } from "react"
-import OrderContext from "../../../context/order-context"
-import { client } from "../../../utils/client"
+import React from "react"
 
 const RegionSelector = ({ selected, regions }) => {
-  // const [regions, setRegions] = useState([]);
-  const { selectRegion, destroyCart } = useContext(OrderContext)
-
-  // useEffect(() => {
-  //   const fetchRegions = async () => {
-  //     const regions = await client.regions
-  //       .list()
-  //       .then(({ regions }) => regions);
-
-  //     selectRegion(regions[0]);
-  //     setRegions(regions);
-  //   };
-
-  //   fetchRegions();
-  // }, []);
-
   const handleChange = (e) => {
-    // const region = JSON.parse(e.target.value)
-    // selectRegion(region)
-
     const [_, countryOrHandle, handle] = window.location.pathname.split("/")
-
-    destroyCart()
 
     if (!handle) {
       navigate(`/${e.target.value}/${countryOrHandle}`)
@@ -68,11 +45,6 @@ const RegionSelector = ({ selected, regions }) => {
               </option>
             )
           })
-          // return (
-          //   <option key={i} value={JSON.stringify(r)}>
-          //     {r.name}
-          //   </option>
-          // );
         })}
       </Select>
     </Flex>

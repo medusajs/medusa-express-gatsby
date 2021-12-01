@@ -31,6 +31,7 @@ const LayoutTest = ({ children }) => {
             transition: "all .2s linear",
           }}
         >
+          <LogoText />
           {children}
         </Card>
         <Flex
@@ -59,22 +60,26 @@ const LayoutTest = ({ children }) => {
             >
               POWERED BY
             </Text>
-            <Flex sx={{ paddingTop: "10px", alignItems: "center" }}>
-              <MedusaLogo />
-              <Link
-                sx={{
-                  textDecoration: "none",
-                  color: "medusa100",
-                }}
-                href="https://www.medusa-commerce.com/"
-              >
+            <Link
+              sx={{
+                textDecoration: "none",
+                color: "medusa100",
+              }}
+              href="https://www.medusa-commerce.com/"
+            >
+              <Flex sx={{ paddingTop: "10px", alignItems: "center" }}>
+                <MedusaLogo />
                 <Text
-                  sx={{ color: "#A3A3A3", fontWeight: 500, fontSize: "1.2em" }}
+                  sx={{
+                    color: "#A3A3A3",
+                    fontWeight: 500,
+                    fontSize: "1.2em",
+                  }}
                 >
                   Medusa
                 </Text>
-              </Link>
-            </Flex>
+              </Flex>
+            </Link>
           </Flex>
         </Flex>
       </Flex>

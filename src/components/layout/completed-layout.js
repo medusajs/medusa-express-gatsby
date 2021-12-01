@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Card, Flex, Text, Link } from "@theme-ui/components"
+import { Card, Flex, Text, Link, Box } from "@theme-ui/components"
 
 import { client } from "../../utils/client"
 
@@ -22,63 +22,39 @@ const Layout = () => {
 
   return (
     <LayoutTest>
-      <OrderConfirmation order={order} />
-      <Flex
-        sx={{
-          flexDirection: ["column", "row"],
-          fontSize: "12px",
-          color: "medusa80",
-          bg: "#F0F0F0",
-          width: "100%",
-          py: "34px",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Flex sx={{ mb: ["1rem", "0"] }}>
-          <Link
-            sx={{
-              textDecoration: "none",
-              color: "medusa80",
-            }}
-            href="https://teklafabrics.com/terms-and-conditions"
-          >
-            Terms & Conditions
-          </Link>
-          <Text sx={{ mx: "1rem" }}>•</Text>
-          <Link
-            sx={{
-              textDecoration: "none",
-              color: "medusa80",
-            }}
-            href="https://teklafabrics.com/terms-and-conditions"
-          >
-            Privacy Policy
-          </Link>
+      <Box>
+        <OrderConfirmation order={order} />
+        <Flex
+          pt={4}
+          sx={{
+            flexDirection: ["column", "row"],
+            fontSize: "12px",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Flex>
+            <Link variant="text.termsLink" href="#">
+              Terms & Conditions
+            </Link>
+            <Text sx={{ mx: "1rem" }}>•</Text>
+            <Link variant="text.termsLink" href="#">
+              Privacy Policy
+            </Link>
+          </Flex>
+          <Text sx={{ display: ["none", "block"], mx: "1rem" }}>•</Text>
+          <Flex>
+            <Link variant="text.termsLink" href="#">
+              Shipping & Delivery
+            </Link>
+            <Text sx={{ mx: "1rem" }}>•</Text>
+            <Link variant="text.termsLink" href="mailto:#">
+              contact
+            </Link>
+          </Flex>
         </Flex>
-        <Text sx={{ display: ["none", "block"], mx: "1rem" }}>•</Text>
-        <Flex>
-          <Link
-            sx={{
-              textDecoration: "none",
-              color: "medusa80",
-            }}
-            href="https://teklafabrics.com/terms-and-conditions"
-          >
-            Shipping & Delivery
-          </Link>
-          <Text sx={{ mx: "1rem" }}>•</Text>
-          <Link
-            sx={{
-              textDecoration: "none",
-              color: "medusa80",
-            }}
-            href="mailto:customercare@teklafabrics.com"
-          >
-            customercare@teklafabrics.com
-          </Link>
-        </Flex>
-      </Flex>
+      </Box>
     </LayoutTest>
   )
 }

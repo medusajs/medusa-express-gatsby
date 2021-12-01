@@ -6,13 +6,15 @@ import OrderContext from "../../context/order-context"
 
 const PaymentForm = ({ session }) => {
   const [errorMessage, setErrorMessage] = useState()
-  const { cart, completeOrder } = useContext(OrderContext)
+  const { cart, completeOrder, setOrderCompleting } = useContext(OrderContext)
 
   const stripe = useStripe()
   const elements = useElements()
 
   const handlePayment = async (e) => {
     e.preventDefault()
+
+    setOrderCompleting()
 
     if (!stripe || !elements) {
       return

@@ -90,6 +90,19 @@ const theme = {
     summary: {
       py: ".1em",
     },
+    termsLink: {
+      textDecoration: "none",
+      color: "medusa100",
+    },
+    confirmationHeading: {
+      // fontSize: "0.8em",
+      lineHeight: "1.8em",
+    },
+    confirmationText: {
+      fontSize: "0.8em",
+      lineHeight: "1.5em",
+      fontWeight: "300",
+    },
     subheading: {
       fontSize: "1.1em",
       fontWeight: 550,
