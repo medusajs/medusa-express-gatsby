@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
                 textDecoration: "none",
                 color: "medusa100",
               }}
-              href="https://www.medusa-commerce.com/"
+              href="https://www.medusajs.com/"
             >
               <Flex sx={{ paddingTop: "10px", alignItems: "center" }}>
                 <MedusaLogo />
