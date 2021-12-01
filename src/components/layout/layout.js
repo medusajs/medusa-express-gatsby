@@ -5,7 +5,7 @@ import ProductSelection from "../product-selection"
 import OrderCompleter from "../order-completer"
 import Logo, { MedusaLogo, LogoText } from "./logo"
 
-const Layout = ({ product, regions, country, regionId }) => {
+const Layout = ({ product, regions, country, regionId, children }) => {
   const { cart } = useContext(OrderContext)
 
   const selectedRegion = useMemo(() => {
@@ -37,23 +37,7 @@ const Layout = ({ product, regions, country, regionId }) => {
             transition: "all .2s linear",
           }}
         >
-          <LogoText />
-          {product ? (
-            <>
-              {cart.items < 1 ? (
-                <ProductSelection
-                  product={product}
-                  regions={regions}
-                  region={selectedRegion}
-                  country={country}
-                />
-              ) : (
-                <OrderCompleter country={country} region={selectedRegion} />
-              )}
-            </>
-          ) : (
-            <Spinner />
-          )}
+          {children}
         </Card>
         <Flex
           sx={{

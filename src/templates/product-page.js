@@ -1,26 +1,26 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { OrderProvider } from "../context/order-context";
-import Layout from "../components/layout";
+import React from "react"
+import { graphql } from "gatsby"
+import { OrderProvider } from "../context/order-context"
+import Layout from "../components/layout"
 
 const ProductPage = ({ data, pageContext }) => {
-  const product = data.medusaProduct;
+  const product = data.medusaProduct
 
   const regions = data.allMedusaRegion.edges.map(({ node }) => {
-    return node;
-  });
+    return node
+  })
 
   return (
     <OrderProvider>
-      <Layout 
+      <Layout
         product={product}
         regions={regions}
         country={pageContext.country}
         regionId={pageContext.region_id}
-       />
+      />
     </OrderProvider>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query($handle: String!) {
@@ -90,6 +90,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default ProductPage;
+export default ProductPage

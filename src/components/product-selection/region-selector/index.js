@@ -6,7 +6,7 @@ import { client } from "../../../utils/client"
 
 const RegionSelector = ({ selected, regions }) => {
   // const [regions, setRegions] = useState([]);
-  const { selectRegion } = useContext(OrderContext)
+  const { selectRegion, destroyCart } = useContext(OrderContext)
 
   // useEffect(() => {
   //   const fetchRegions = async () => {
@@ -26,6 +26,8 @@ const RegionSelector = ({ selected, regions }) => {
     // selectRegion(region)
 
     const [_, countryOrHandle, handle] = window.location.pathname.split("/")
+
+    destroyCart()
 
     if (!handle) {
       navigate(`/${e.target.value}/${countryOrHandle}`)

@@ -7,6 +7,8 @@ import Review from "./review"
 import Total from "./total"
 import Forms from "./forms"
 import BreadCrumbs from "../breadcrumbs"
+import OrderConfirmation from "./order-confirmation"
+import Spinner from "./spinner"
 
 const OrderCompleter = ({ country, region }) => {
   const { cart, order, orderStatus } = useContext(OrderContext)
@@ -48,15 +50,21 @@ const OrderCompleter = ({ country, region }) => {
         flexDirection: "column",
       }}
     >
-      <Flex pt={3} pb={4}>
-        <BreadCrumbs
-          step={1}
-          sx={{
-            alignItems: "center",
-          }}
-        />
-      </Flex>
-      <Forms region={region} country={country} />
+      {order ? (
+        <Spinner done={done} />
+      ) : (
+        <>
+          <Flex pt={3} pb={4}>
+            <BreadCrumbs
+              step={1}
+              sx={{
+                alignItems: "center",
+              }}
+            />
+          </Flex>
+          <Forms region={region} country={country} />
+        </>
+      )}
     </Flex>
   )
 }

@@ -9,7 +9,7 @@ import { Button } from "theme-ui"
 import { formatVariantPrice } from "../../utils/variant-price"
 
 const ProductSelection = ({ product, region, regions, country }) => {
-  const { createCart, status, variant, variantId } = useContext(OrderContext)
+  const { createCart, status, variant, cart } = useContext(OrderContext)
   const [inventory, setInventory] = useState({})
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const ProductSelection = ({ product, region, regions, country }) => {
       </Flex>
       <Text variant="header3">{product.title}</Text>
       <Flex mt={4}>
-        <ProductDisplay product={product} />
+        <ProductDisplay region={region} product={product} />
       </Flex>
       <Flex
         my={3}
@@ -57,7 +57,7 @@ const ProductSelection = ({ product, region, regions, country }) => {
         <Text>{formatVariantPrice(variant, region)}</Text>
       </Flex>
       <Button
-        sx={{ width: "100%", padding: "25px", cursor: "pointer" }}
+        sx={{}}
         onClick={() => {
           createCart(region.id, country)
         }}

@@ -10,9 +10,12 @@ const actions = {
   SET_VARIANT: "SET_VARIANT",
   UPDATE_QUANTITY: "UPDATE_QUANTITY",
   SET_CONTACT: "SET_CONTACT",
+  SWITCH_REGIONS: "SWITCH_REGIONS",
   CLEAR_CONTACT: "CLEAR_CONTACT",
   SET_DELIVERY: "SET_DELIVERY",
   SET_SHIPPING: "SET_SHIPPING",
+  SET_ORDER: "SET_ORDER",
+  SET_ORDER_STATUS: "SET_ORDER_STATUS",
 }
 
 export const defaultOrderContext = {
@@ -74,6 +77,17 @@ const reducer = (state, action) => {
         ...state,
         contact: action.payload,
       }
+
+    case actions.SET_ORDER:
+      return {
+        ...state,
+        order: action.payload,
+      }
+    case actions.SET_ORDER_STATUS:
+      return {
+        ...state,
+        orderStatus: action.payload,
+      }
     case actions.DESTROY_CART:
       return {
         ...state,
@@ -128,26 +142,52 @@ export const OrderProvider = ({ children }) => {
     fetchOptions()
   }, [state.cart.id])
 
-  useEffect(() => {
-    const retrieveCart = async () => {
-      const id = localStorage.getItem("cart_id")
+  // useEffect(() => {
+  //   const retrieveCart = async () => {
+  //     const id = localStorage.getItem("cart_id")
 
-      const cart = await client.carts
-        .retrieve(id)
-        .then(({ cart }) => cart)
-        .catch((_) => undefined)
+  //     const cart = await client.carts
+  //       .retrieve(id)
+  //       .then(({ cart }) => cart)
+  //       .catch((_) => undefined)
 
-      if (cart) {
-        dispatch({ type: actions.SET_CART, payload: cart })
-      } else {
-        localStorage.removeItem("cart_id")
+  //     if (cart) {
+  //       dispatch({ type: actions.SET_CART, payload: cart })
+  //     } else {
+  //       localStorage.removeItem("cart_id")
+  //     }
+  //   }
+
+  //   if (localStorage) {
+  //     retrieveCart()
+  //   }
+  // }, [])
+
+  const completeOrder = async () => {
+    if (state.cart && state.cart.id) {
+      dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+
+      try {
+        await client.carts.setPaymentSession(state.cart.id, {
+          provider_id: "stripe",
+        })
+
+        return await client.carts
+          .complete(state.cart.id)
+          .then(({ data, type }) => {
+            dispatch({ type: actions.SET_ORDER_STATUS, payload: "completed" })
+            if (type === "order") {
+              dispatch({ type: actions.SET_ORDER, payload: data })
+            }
+          })
+      } catch (err) {
+        dispatch({
+          type: actions.SET_ORDER_STATUS,
+          payload: "completion_failed",
+        })
       }
     }
-
-    if (localStorage) {
-      retrieveCart()
-    }
-  }, [])
+  }
 
   const selectRegion = (region) => {
     dispatch({ type: actions.SET_REGION, payload: region })
@@ -172,8 +212,13 @@ export const OrderProvider = ({ children }) => {
         })
         .then(({ cart }) => cart)
 
-      const cart = await client.carts.lineItems
-        .create(id, { variant_id: variant.id, quantity: quantity })
+      await client.carts.lineItems.create(id, {
+        variant_id: variant.id,
+        quantity: quantity,
+      })
+
+      const cart = await client.carts
+        .createPaymentSessions(id)
         .then(({ cart }) => cart)
 
       dispatch({ type: actions.SET_CART, payload: cart })
@@ -193,6 +238,7 @@ export const OrderProvider = ({ children }) => {
   }
 
   const destroyCart = () => {
+    console.log("destroy cart")
     dispatch({ type: actions.DESTROY_CART })
   }
 
@@ -242,6 +288,7 @@ export const OrderProvider = ({ children }) => {
         setDetails,
         updateQuantity,
         addShippingMethod,
+        completeOrder,
         dispatch,
       }}
     >

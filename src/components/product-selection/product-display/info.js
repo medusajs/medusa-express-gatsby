@@ -4,8 +4,7 @@ import OptionSelector from "./option-selector"
 import OrderContext from "../../../context/order-context"
 import { getFrom } from "../../../utils/get-from"
 
-const Info = ({ product }) => {
-  const { selectedRegion, createCart } = useContext(OrderContext)
+const Info = ({ product, region }) => {
   return (
     <Flex
       sx={{
@@ -30,13 +29,13 @@ const Info = ({ product }) => {
             From
           </Text>
           {`${getFrom(product.variants, {
-            currency_code: selectedRegion.currency_code,
-            tax_rate: selectedRegion.tax_rate,
+            currency_code: region.currency_code,
+            tax_rate: region.tax_rate,
           })}`}
         </Text>
         <Text
-            my={1}
-sx={{
+          my={1}
+          sx={{
             fontSize: ".75em",
             fontWeight: "400",
           }}

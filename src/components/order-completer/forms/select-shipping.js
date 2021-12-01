@@ -64,20 +64,12 @@ const ShippingOption = ({ selected, option, region, onClick }) => {
 
 const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
   const { shipping, addShippingMethod } = useContext(OrderContext)
-  // const [error, setError] = useState(false)
 
   const handleClick = async (id) => {
     formik.setFieldValue(`${set}.${name}`, id)
     await addShippingMethod(id)
   }
 
-  // useEffect(() => {
-  //   if (formik.errors[set]?.[name] && formik.touched[set]?.[name]) {
-  //     setError(true)
-  //   } else {
-  //     setError(false)
-  //   }
-  // }, [formik.errors])
   return (
     <Box
       sx={{

@@ -30,11 +30,14 @@ const theme = {
       bg: "primary",
       color: "white",
       fontWeight: "500",
-      p: "6px, 8px, 6px, 8px",
+      // p: "6px, 8px, 6px, 8px",
       height: "30px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      width: "100%",
+      padding: "25px",
+      cursor: "pointer",
     },
     incrementor: {
       bg: "transparent",
@@ -67,6 +70,15 @@ const theme = {
       padding: "0",
     },
   },
+  box: {
+    paymentField: {
+      bg: "background",
+      padding: "12px",
+      fontSize: "1.1em",
+      borderRadius: "5px",
+      marginBottom: "20px",
+    },
+  },
   text: {
     fz_s: {
       fontSize: "10px",
@@ -84,6 +96,7 @@ const theme = {
       color: "black",
     },
   },
+
   forms: {
     select: {
       bg: "cool",

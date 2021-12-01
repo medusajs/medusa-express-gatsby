@@ -1,8 +1,8 @@
-import React from "react";
-import { Flex, Image } from "@theme-ui/components";
-import Info from "./info";
+import React from "react"
+import { Flex, Image } from "@theme-ui/components"
+import Info from "./info"
 
-const ProductDisplay = ({ product }) => {
+const ProductDisplay = ({ region, product }) => {
   return product ? (
     <Flex>
       <Image
@@ -16,9 +16,9 @@ const ProductDisplay = ({ product }) => {
         src={product.thumbnail}
         alt={product.title}
       />
-      <Info product={product} />
+      <Info product={product} region={region} />
     </Flex>
-  ) : null;
-};
+  ) : null
+}
 
-export default ProductDisplay;
+export default ProductDisplay
