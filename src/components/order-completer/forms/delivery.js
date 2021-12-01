@@ -1,28 +1,26 @@
-import React, { useContext, useEffect } from "react";
-import { Box, Text, Button, Flex } from "@theme-ui/components";
-import Field from "./field";
-import SelectCountry from "./select-country";
-import OrderContext from "../../../context/order-context";
-import SelectShipping from "./select-shipping";
-import FieldSplitter from "./field-splitter";
+import React, { useContext, useEffect } from "react"
+import { Box, Text, Button, Flex } from "@theme-ui/components"
+import Field from "./field"
+import SelectCountry from "./select-country"
+import OrderContext from "../../../context/order-context"
+import SelectShipping from "./select-shipping"
+import FieldSplitter from "./field-splitter"
 
 const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
-  const { delivery } = useContext(OrderContext);
-  console.log(country)
+  const { delivery } = useContext(OrderContext)
 
   useEffect(() => {
-    formik.setFieldValue("delivery.country_code", country);
-  }, country);
-  
+    formik.setFieldValue("delivery.country_code", country)
+  }, country)
+
   return (
     <Box as="form">
       <Text
         as="h3"
         sx={{
           mb: "1em",
-          fontSize: "1.1em",
-          fontWeight: 550,
         }}
+        variant="subheading"
       >
         Delivery
       </Text>
@@ -55,21 +53,13 @@ const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
               />
             }
           />
-          {/* <SelectCountry
-            formik={formik}
-            placeholder={"Country"}
-            value={formik.values.delivery.country_code}
-            name={"country_code"}
-            set={"delivery"}
-          /> */}
           <Text
             mt={4}
             as="h3"
             sx={{
               mb: "1em",
-              fontSize: "1.1em",
-              fontWeight: 550,
             }}
+            variant="subheading"
           >
             Shipping options
           </Text>
@@ -100,16 +90,10 @@ const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
             <Text variant="summary">{delivery.country_code.toUpperCase()}</Text>
           </Flex>
           <Button
-            sx={{
-              bg: "transparent",
-              color: "primary",
-              textDecoration: "underline",
-              cursor: "pointer",
-              padding: "0",
-            }}
+            variant="edit"
             onClick={(e) => {
-              e.preventDefault();
-              setIsValid({ ...isValid, delivery: false });
+              e.preventDefault()
+              setIsValid({ ...isValid, delivery: false })
             }}
           >
             Edit
@@ -117,7 +101,7 @@ const Delivery = ({ formik, isValid, setIsValid, region, country }) => {
         </Flex>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default Delivery;
+export default Delivery

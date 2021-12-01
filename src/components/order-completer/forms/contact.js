@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Box, Text, Flex, Button } from "@theme-ui/components";
-import Field from "./field";
-import OrderContext from "../../../context/order-context";
-import FieldSplitter from "./field-splitter";
+import React, { useContext } from "react"
+import { Box, Text, Flex, Button } from "@theme-ui/components"
+import Field from "./field"
+import OrderContext from "../../../context/order-context"
+import FieldSplitter from "./field-splitter"
 
 const Contact = ({ formik, isValid, setIsValid }) => {
-  const { contact } = useContext(OrderContext);
+  const { contact } = useContext(OrderContext)
 
   return (
     <Box as="form">
@@ -13,9 +13,8 @@ const Contact = ({ formik, isValid, setIsValid }) => {
         as="h2"
         sx={{
           mb: "1em",
-          fontSize: "1.1em",
-          fontWeight: 550,
         }}
+        variant="subheading"
       >
         Contact
       </Text>
@@ -75,16 +74,10 @@ const Contact = ({ formik, isValid, setIsValid }) => {
             <Text variant="summary">{contact.phone}</Text>
           </Flex>
           <Button
-            sx={{
-              bg: "transparent",
-              color: "primary",
-              textDecoration: "underline",
-              cursor: "pointer",
-              padding: "0",
-            }}
+            variant="edit"
             onClick={(e) => {
-              e.preventDefault();
-              setIsValid({ ...isValid, contact: false });
+              e.preventDefault()
+              setIsValid({ ...isValid, contact: false })
             }}
           >
             Edit
@@ -92,7 +85,7 @@ const Contact = ({ formik, isValid, setIsValid }) => {
         </Flex>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

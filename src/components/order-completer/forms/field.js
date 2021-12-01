@@ -28,21 +28,9 @@ const Field = ({ formik, value, name, set, placeholder }) => {
         onChange={formik.handleChange}
         placeholder={placeholder}
         sx={{
-          border: "1px solid ",
-          "::placeholder": {
-            color: placeholderColor
-          },
-          ":-ms-input-placeholder": {
-              color: placeholderColor
-          },
-          "::-ms-input-placeholder": {
-            color: placeholderColor
-
-          },
-          backgroundColor: '#F7F7FA',
           borderColor: error ? "salmon" : "#F7F7FA",
-          transition: "all .2s linear",
         }}
+        variant='field'
       />
     </Flex>
   );

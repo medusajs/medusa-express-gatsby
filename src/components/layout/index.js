@@ -8,6 +8,8 @@ import Logo, { MedusaLogo, LogoText } from "./logo"
 const Layout = ({ product, regions, country, regionId }) => {
   const { cart } = useContext(OrderContext)
 
+  console.log(country)
+
   const selectedRegion = useMemo(() => {
     return regions.find((r) => r.id === regionId)
   }, [regions, regionId])
@@ -37,9 +39,9 @@ const Layout = ({ product, regions, country, regionId }) => {
             transition: "all .2s linear",
           }}
         >
-            <LogoText />
+          <LogoText />
           {product ? (
-          <>
+            <>
               {cart.items < 1 ? (
                 <ProductSelection
                   product={product}

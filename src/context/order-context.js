@@ -91,6 +91,7 @@ const reducer = (state, action) => {
           phone: "",
         },
       }
+
     case actions.SET_DELIVERY:
       return {
         ...state,
@@ -109,8 +110,6 @@ const reducer = (state, action) => {
         ...state,
         cart: action.payload,
       }
-    default:
-      return state
   }
 }
 
@@ -162,13 +161,14 @@ export const OrderProvider = ({ children }) => {
     dispatch({ type: actions.UPDATE_QUANTITY, payload: quantity })
   }
 
-  const createCart = async (region, countryCode)  => {
+  const createCart = async (region, countryCode) => {
     const { variant, quantity } = state
 
     if (variant.id) {
       const { id } = await client.carts
         .create({
-          region_id: region, country_code: countryCode
+          region_id: region,
+          country_code: countryCode,
         })
         .then(({ cart }) => cart)
 
@@ -196,9 +196,18 @@ export const OrderProvider = ({ children }) => {
     dispatch({ type: actions.DESTROY_CART })
   }
 
+  const addShippingMethod = async (shippingId) => {
+    return await client.carts
+      .addShippingMethod(state.cart.id, {
+        option_id: shippingId,
+      })
+      .then(({ cart }) => {
+        dispatch({ type: actions.SET_CART, payload: cart })
+        return cart
+      })
+  }
+
   const setDetails = async (contact, delivery) => {
-    console.log('contact', contact)
-    console.log('delivery', delivery)
     return await client.carts
       .update(state.cart.id, {
         email: contact.email,
@@ -214,11 +223,11 @@ export const OrderProvider = ({ children }) => {
         },
       })
       .then(({ cart }) => {
-        dispatch({ type: actions.SET_CART, payload: cart });
-        return cart;
-      });
-  };
-  
+        dispatch({ type: actions.SET_CART, payload: cart })
+        return cart
+      })
+  }
+
   return (
     <OrderContext.Provider
       value={{
@@ -232,6 +241,7 @@ export const OrderProvider = ({ children }) => {
         selectVariant,
         setDetails,
         updateQuantity,
+        addShippingMethod,
         dispatch,
       }}
     >

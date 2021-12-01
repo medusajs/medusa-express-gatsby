@@ -9,7 +9,7 @@ const theme = {
     heading: 700,
   },
   colors: {
-    primary: "#000",
+    primary: "#0A3149",
     medusaGreen: "#56FBB1",
     medusa100: "#454B54",
     deepBlue: "#0A3149",
@@ -17,6 +17,7 @@ const theme = {
     cool: "#EEF0F5",
     background: "#F7F7FA",
     salmon: "#FF9B9B",
+    placeholder: "#BBBBBB",
   },
   cards: {
     container: {
@@ -26,7 +27,7 @@ const theme = {
   },
   buttons: {
     cta: {
-      bg: "deepBlue",
+      bg: "primary",
       color: "white",
       fontWeight: "500",
       p: "6px, 8px, 6px, 8px",
@@ -56,12 +57,14 @@ const theme = {
       "&:hover": {
         bg: "ui",
       },
-      edit: {
-        bg: "transparent",
-        color: "primary",
-        cursor: "pointer",
-        textDecoration: "underline",
-      },
+    },
+    edit: {
+      bg: "transparent",
+      color: "primary",
+      cursor: "pointer",
+      fontSize: "14px",
+      textDecoration: "underline",
+      padding: "0",
     },
   },
   text: {
@@ -75,6 +78,11 @@ const theme = {
     summary: {
       py: ".1em",
     },
+    subheading: {
+      fontSize: "1.1em",
+      fontWeight: 550,
+      color: "black",
+    },
   },
   forms: {
     select: {
@@ -85,6 +93,20 @@ const theme = {
       bg: "cool",
       border: "none",
     },
+    field: {
+      border: "2px solid background",
+      "::placeholder": {
+        color: "placeholder",
+      },
+      ":-ms-input-placeholder": {
+        color: "placeholder",
+      },
+      "::-ms-input-placeholder": {
+        color: "placeholder",
+      },
+      backgroundColor: "background",
+      transition: "all .2s linear",
+    },
   },
   styles: {
     root: {
@@ -93,6 +115,6 @@ const theme = {
       background: "ui",
     },
   },
-};
+}
 
-export default theme;
+export default theme

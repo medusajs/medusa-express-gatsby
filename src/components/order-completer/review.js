@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react"
 import OrderContext from "../../context/order-context"
-import { Flex, Image, Text } from "@theme-ui/components"
+import { Flex, Image, Button, Text } from "@theme-ui/components"
 
 const Review = () => {
   const { cart, destroyCart } = useContext(OrderContext)
@@ -46,12 +46,9 @@ const Review = () => {
             <Text sx={{ color: "#B0B0B0" }}>Size: </Text>
             {item.variant.title}
           </Text>
-          <Text
-            sx={{ cursor: "pointer", textDecoration: "underline" }}
-            onClick={() => destroyCart()}
-          >
+          <Button variant="edit" onClick={() => destroyCart()}>
             Edit
-          </Text>
+          </Button>
         </Flex>
         <Text sx={{ fontWeight: 300 }}>
           <Text sx={{ color: "#B0B0B0" }}>quantity: </Text>
