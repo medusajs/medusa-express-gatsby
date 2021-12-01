@@ -4,7 +4,7 @@ import OrderContext from "../../context/order-context"
 import ProductSelection from "../product-selection"
 import OrderCompleter from "../order-completer"
 import Logo, { MedusaLogo, LogoText } from "./logo"
-import LayoutTest from "./layout"
+import OuterLayout from "./layout"
 
 const Layout = ({ product, regions, country, regionId }) => {
   const { cart } = useContext(OrderContext)
@@ -14,7 +14,7 @@ const Layout = ({ product, regions, country, regionId }) => {
   }, [regions, regionId])
 
   return (
-    <LayoutTest>
+    <OuterLayout>
       {product ? (
         <>
           {cart.items < 1 ? (
@@ -31,7 +31,7 @@ const Layout = ({ product, regions, country, regionId }) => {
       ) : (
         <Spinner />
       )}
-    </LayoutTest>
+    </OuterLayout>
   )
 }
 

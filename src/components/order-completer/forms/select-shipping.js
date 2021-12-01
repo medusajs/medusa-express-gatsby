@@ -63,13 +63,18 @@ const ShippingOption = ({ selected, option, region, onClick }) => {
 }
 
 const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
-  const { shipping, addShippingMethod } = useContext(OrderContext)
+  const { cart, shipping, addShippingMethod } = useContext(OrderContext)
+  const [added, setAdded] = useState("")
 
   const handleClick = async (id) => {
+    setAdded(id)
     formik.setFieldValue(`${set}.${name}`, id)
     await addShippingMethod(id)
+    setAdded("")
   }
 
+  console.log(cart.shipping_methods)
+  console.log(shipping)
   return (
     <Box
       sx={{
@@ -78,11 +83,15 @@ const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
     >
       <Flex sx={{ flexWrap: "wrap" }}>
         {shipping.map((s) => {
+          console.log(s.id)
+          const res = cart.shipping_methods.find(
+            (so) => s.id === so.shipping_option_id
+          )
           return (
             <ShippingOption
               key={s.id}
               onClick={() => handleClick(s.id)}
-              selected={value === s.id}
+              selected={res !== undefined || added === s.id}
               option={s}
               region={region}
             />

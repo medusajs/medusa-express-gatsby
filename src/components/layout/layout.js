@@ -1,13 +1,10 @@
-import React, { useContext, useMemo } from "react"
-import { Card, Flex, Box, Spinner, Text, Link } from "@theme-ui/components"
-import OrderContext from "../../context/order-context"
-import ProductSelection from "../product-selection"
-import OrderCompleter from "../order-completer"
+import React from "react"
+import { Card, Flex, Text, Link } from "@theme-ui/components"
 import Logo, { MedusaLogo, LogoText } from "./logo"
 
-const LayoutTest = ({ children }) => {
+const Layout = ({ children }) => {
   return (
-    <Flex sx={{ widht: "100%", flexDirection: "column" }}>
+    <Flex sx={{ width: "100%", flexDirection: "column" }}>
       <Flex
         sx={{
           justifyContent: "space-between",
@@ -23,8 +20,8 @@ const LayoutTest = ({ children }) => {
           sx={{
             bg: "white",
             my: "2em",
-            width: "700px", //cart.items < 1 ? "800px" : "500px",
-            height: "auto", //cart.items < 1 ? "400px" :
+            width: "700px",
+            height: "auto",
             p: "1.5em",
             borderRadius: "8px",
             justifyContent: "center",
@@ -87,4 +84,4 @@ const LayoutTest = ({ children }) => {
   )
 }
 
-export default LayoutTest
+export default Layout

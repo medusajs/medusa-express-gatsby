@@ -4,7 +4,6 @@ import { Flex, Image, Button, Text } from "@theme-ui/components"
 
 const Review = () => {
   const { cart, destroyCart } = useContext(OrderContext)
-
   const item = useMemo(() => {
     return cart.items[0]
   }, [cart.items])

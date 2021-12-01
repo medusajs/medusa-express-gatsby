@@ -8,6 +8,7 @@ const theme = {
     body: 400,
     heading: 700,
   },
+  breakpoints: ["720px"],
   colors: {
     primary: "#0A3149",
     medusaGreen: "#56FBB1",
