@@ -7,9 +7,7 @@ import OrderContext from "../../context/order-context"
 
 import PaymentForm from "./payment-form"
 
-const STRIPE_KEY =
-  process.env.GATSBY_STRIPE_KEY ||
-  "pk_test_51J2gafDoyH7ENvmSIrXyISgjWYzP0pXnZ0qkSN9PlNubSUGzDyOIVBgjO8mnCiPZSG9PY2Juk2rH07NKAedvf9OW00JUyBsDva"
+const STRIPE_KEY = process.env.GATSBY_STRIPE_KEY || ""
 const stripePromise = loadStripe(STRIPE_KEY)
 
 const Payment = () => {
