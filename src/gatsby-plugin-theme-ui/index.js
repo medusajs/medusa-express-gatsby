@@ -8,8 +8,9 @@ const theme = {
     body: 400,
     heading: 700,
   },
+  breakpoints: ["720px"],
   colors: {
-    primary: "#000",
+    primary: "#0A3149",
     medusaGreen: "#56FBB1",
     medusa100: "#454B54",
     deepBlue: "#0A3149",
@@ -17,6 +18,7 @@ const theme = {
     cool: "#EEF0F5",
     background: "#F7F7FA",
     salmon: "#FF9B9B",
+    placeholder: "#BBBBBB",
   },
   cards: {
     container: {
@@ -26,14 +28,16 @@ const theme = {
   },
   buttons: {
     cta: {
-      bg: "deepBlue",
-      color: "medusaGreen",
+      bg: "primary",
+      color: "white",
       fontWeight: "500",
-      p: "6px, 8px, 6px, 8px",
       height: "30px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      width: "100%",
+      padding: "25px",
+      cursor: "pointer",
     },
     incrementor: {
       bg: "transparent",
@@ -56,12 +60,23 @@ const theme = {
       "&:hover": {
         bg: "ui",
       },
-      edit: {
-        bg: "transparent",
-        color: "primary",
-        cursor: "pointer",
-        textDecoration: "underline",
-      },
+    },
+    edit: {
+      bg: "transparent",
+      color: "primary",
+      cursor: "pointer",
+      fontSize: "14px",
+      textDecoration: "underline",
+      padding: "0",
+    },
+  },
+  box: {
+    paymentField: {
+      bg: "background",
+      padding: "12px",
+      fontSize: "1.1em",
+      borderRadius: "5px",
+      marginBottom: "20px",
     },
   },
   text: {
@@ -75,7 +90,25 @@ const theme = {
     summary: {
       py: ".1em",
     },
+    termsLink: {
+      textDecoration: "none",
+      color: "medusa100",
+    },
+    confirmationHeading: {
+      lineHeight: "1.8em",
+    },
+    confirmationText: {
+      fontSize: "0.8em",
+      lineHeight: "1.5em",
+      fontWeight: "300",
+    },
+    subheading: {
+      fontSize: "1.1em",
+      fontWeight: 550,
+      color: "black",
+    },
   },
+
   forms: {
     select: {
       bg: "cool",
@@ -85,6 +118,20 @@ const theme = {
       bg: "cool",
       border: "none",
     },
+    field: {
+      border: "2px solid background",
+      "::placeholder": {
+        color: "placeholder",
+      },
+      ":-ms-input-placeholder": {
+        color: "placeholder",
+      },
+      "::-ms-input-placeholder": {
+        color: "placeholder",
+      },
+      backgroundColor: "background",
+      transition: "all .2s linear",
+    },
   },
   styles: {
     root: {
@@ -93,6 +140,6 @@ const theme = {
       background: "ui",
     },
   },
-};
+}
 
-export default theme;
+export default theme

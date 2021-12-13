@@ -1,82 +1,82 @@
-import { Flex, Select, Text, Button } from "@theme-ui/components";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import OrderContext from "../../../context/order-context";
+import { Flex, Select, Text, Button } from "@theme-ui/components"
+import React, { useContext, useEffect, useMemo, useState } from "react"
+import OrderContext from "../../../context/order-context"
 
 const OptionSelector = ({ product }) => {
-  const { quantity, updateQuantity, selectVariant } = useContext(OrderContext);
-  const [options, setOptions] = useState([]);
-  const [selection, setSelection] = useState(JSON.stringify({}));
+  const { quantity, updateQuantity, selectVariant } = useContext(OrderContext)
+  const [options, setOptions] = useState([])
+  const [selection, setSelection] = useState(JSON.stringify({}))
 
   useEffect(() => {
-    const opts = [];
+    const opts = []
     for (const option of product.options) {
       const opt = {
         title: option.title,
         id: option.id,
         values: [...new Set(option.values.map((v) => v.value))],
-      };
-      opts.push(opt);
+      }
+      opts.push(opt)
     }
-    setOptions(opts);
+    setOptions(opts)
 
-    const select = {};
+    const select = {}
     for (const opt of opts) {
-      select[opt.id] = opt.values[0];
+      select[opt.id] = opt.values[0]
     }
-    setSelection(JSON.stringify(select));
-  }, [product]);
+    setSelection(JSON.stringify(select))
+  }, [product])
 
   const handleQuantity = (update) => {
-    const newQuantity = quantity + update;
+    const newQuantity = quantity + update
 
     if (newQuantity > 0) {
-      updateQuantity(newQuantity);
+      updateQuantity(newQuantity)
     }
-  };
+  }
 
   const handleSelect = (e) => {
-    const pair = JSON.parse(e.target.value);
-    const tmp = JSON.parse(selection);
-    tmp[pair.option] = pair.value;
-    setSelection(JSON.stringify(tmp));
-  };
+    const pair = JSON.parse(e.target.value)
+    const tmp = JSON.parse(selection)
+    tmp[pair.option] = pair.value
+    setSelection(JSON.stringify(tmp))
+  }
 
   const createVariantSet = (options, variants) => {
-    const set = [];
+    const set = []
     for (const variant of variants) {
-      const optionSet = {};
+      const optionSet = {}
       for (const option of variant.options) {
-        const { id } = options.find((o) => o.id === option.option_id);
-        optionSet[id] = option.value;
+        const { id } = options.find((o) => o.id === option.option_id)
+        optionSet[id] = option.value
       }
-      optionSet["id"] = variant.id;
-      set.push(optionSet);
+      optionSet["variant"] = variant
+      set.push(optionSet)
     }
-    return set;
-  };
+    return set
+  }
 
   const variantSet = useMemo(() => {
     if (product?.options && product?.variants) {
-      return createVariantSet(product.options, product.variants);
+      return createVariantSet(product.options, product.variants)
     } else {
-      return [];
+      return []
     }
-  }, [product]);
+  }, [product])
 
   useEffect(() => {
-    const select = JSON.parse(selection);
+    const select = JSON.parse(selection)
     for (const variant of variantSet) {
-      const keys = Object.keys(variant).filter((k) => k !== "id");
-      let count = 0;
+      const keys = Object.keys(variant).filter((k) => k !== "variant")
+      let count = 0
       for (const key of keys) {
-        count = select[key] === variant[key] ? count + 1 : 0;
+        count = select[key] === variant[key] ? count + 1 : 0
       }
 
       if (count === keys.length) {
-        selectVariant(variant.id);
+        selectVariant(variant.variant)
       }
     }
-  }, [selection]);
+  }, [selection])
 
   return (
     <Flex
@@ -92,18 +92,15 @@ const OptionSelector = ({ product }) => {
               alignItems: "center",
               justifyContent: "space-between",
               pt: "1em",
+              fontSize: "0.75em",
             }}
           >
-            <Text
-              sx={{
-                fontSize: "1.1em",
-              }}
-            >
-              {o.title}
-            </Text>
+            <Text>{o.title}</Text>
             <Select
               sx={{
                 minWidth: "170px",
+                border: "1px solid #0A3149",
+                backgroundColor: "inherit",
               }}
               onChange={handleSelect}
             >
@@ -115,26 +112,21 @@ const OptionSelector = ({ product }) => {
                   >
                     {v}
                   </option>
-                );
+                )
               })}
             </Select>
           </Flex>
-        );
+        )
       })}
       <Flex
         sx={{
           alignItems: "center",
           justifyContent: "space-between",
           pt: "1em",
+          fontSize: "0.75em",
         }}
       >
-        <Text
-          sx={{
-            fontSize: "1.1em",
-          }}
-        >
-          Quantity
-        </Text>
+        <Text>Quantity</Text>
         <Flex
           sx={{
             width: "120px",
@@ -143,9 +135,18 @@ const OptionSelector = ({ product }) => {
             borderRadius: "4px",
             height: "33px",
             p: "8px 0",
+            border: "1px solid #0A3149",
+            backgroundColor: "inherit",
           }}
         >
-          <Button variant="decrementor" onClick={() => handleQuantity(-1)}>
+          <Button
+            sx={{
+              borderTop: "1px solid #0A3149",
+              borderBottom: "1px solid #0A3149",
+            }}
+            variant="decrementor"
+            onClick={() => handleQuantity(-1)}
+          >
             –
           </Button>
           <Text
@@ -156,13 +157,20 @@ const OptionSelector = ({ product }) => {
           >
             {quantity}
           </Text>
-          <Button variant="incrementor" onClick={() => handleQuantity(1)}>
+          <Button
+            sx={{
+              borderTop: "1px solid #0A3149",
+              borderBottom: "1px solid #0A3149",
+            }}
+            variant="incrementor"
+            onClick={() => handleQuantity(1)}
+          >
             +
           </Button>
         </Flex>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default OptionSelector;
+export default OptionSelector

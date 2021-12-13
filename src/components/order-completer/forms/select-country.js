@@ -1,25 +1,25 @@
-import React, { useContext, useState, useEffect } from "react";
-import OrderContext from "../../../context/order-context";
-import { Box, Select } from "@theme-ui/components";
+import React, { useContext, useState, useEffect } from "react"
+import OrderContext from "../../../context/order-context"
+import { Box, Select } from "@theme-ui/components"
 
 const SelectCountry = ({ formik, value, name, set, placeholder }) => {
-  const { selectedRegion } = useContext(OrderContext);
-  const [error, setError] = useState(false);
+  const { selectRegion } = useContext(OrderContext)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (formik.errors[set]?.[name] && formik.touched[set]?.[name]) {
-      setError(true);
+      setError(true)
     } else {
-      setError(false);
+      setError(false)
     }
-  }, [formik.errors]);
+  }, [formik.errors])
   return (
     <Box
       sx={{
         mb: ".75em",
       }}
     >
-      <Select
+      {/* <Select
         name={`${set}.${name}`}
         value={value}
         onChange={formik.handleChange}
@@ -37,9 +37,9 @@ const SelectCountry = ({ formik, value, name, set, placeholder }) => {
             </option>
           );
         })}
-      </Select>
+      </Select> */}
     </Box>
-  );
-};
+  )
+}
 
-export default SelectCountry;
+export default SelectCountry

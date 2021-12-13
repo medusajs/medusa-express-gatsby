@@ -1,19 +1,28 @@
-import { Box, Button } from "@theme-ui/components";
-import React, { useContext, useState } from "react";
-import Contact from "./contact";
-import Delivery from "./delivery";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import OrderContext from "../../../context/order-context";
+import { Box, Button, Text, Flex } from "@theme-ui/components"
+import React, { useContext, useState } from "react"
+import Contact from "./contact"
+import Delivery from "./delivery"
+import Payment from "../payment"
+import { useFormik } from "formik"
+import * as Yup from "yup"
+import OrderContext from "../../../context/order-context"
+import Total from "../total"
+import Review from "../review"
 
-const Forms = () => {
-  const { contact, delivery, setDelivery, setContact } = useContext(
-    OrderContext
-  );
+const Forms = ({ country, region }) => {
+  const {
+    contact,
+    delivery,
+    setDelivery,
+    setContact,
+    setDetails,
+    setCountryName,
+  } = useContext(OrderContext)
+
   const [isValid, setIsValid] = useState({
     contact: false,
     delivery: false,
-  });
+  })
   const formik = useFormik({
     initialValues: {
       contact: {
@@ -47,46 +56,60 @@ const Forms = () => {
         shipping_option: Yup.string().required("Required"),
       }),
     }),
-    onSubmit: (values) => {
-      setIsValid({ delivery: true, contact: true });
-      setDelivery(values.delivery);
-      setContact(values.contact);
+    onSubmit: async (values) => {
+      setIsValid({ delivery: true, contact: true })
+      setDelivery(values.delivery)
+      setContact(values.contact)
+      return await setDetails(values.contact, values.delivery)
     },
-  });
+  })
   return (
     <Box>
-      <Contact formik={formik} isValid={isValid} setIsValid={setIsValid} />
-      <Box
-        sx={{
-          height: "1px",
-          bg: "cool",
-          width: "100%",
-          my: "1em",
-        }}
-      />
-      <Delivery formik={formik} isValid={isValid} setIsValid={setIsValid} />
-      <Box
-        sx={{
-          height: "1px",
-          bg: "cool",
-          width: "100%",
-          my: "1em",
-        }}
-      />
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          formik.submitForm();
-        }}
-        variant="cta"
-        sx={{
-          width: "100%",
-        }}
-      >
-        Go to payment
-      </Button>
-    </Box>
-  );
-};
+      {isValid.delivery && isValid.contact && (
+        <Box pt={2}>
+          <Text sx={{ fontWeight: 550 }}>Your order</Text>
+          <Box mt={3}>
+            <Review /> <Total />
+          </Box>
+        </Box>
+      )}
+      <Box mb={4}>
+        <Contact formik={formik} isValid={isValid} setIsValid={setIsValid} />
+      </Box>
 
-export default Forms;
+      <Box pt={1}>
+        <Delivery
+          region={region}
+          country={country}
+          formik={formik}
+          isValid={isValid}
+          setIsValid={setIsValid}
+        />
+      </Box>
+
+      <Box mt={4}>
+        {isValid.delivery && isValid.contact ? (
+          <Payment />
+        ) : (
+          <Button
+            onClick={(e) => {
+              e.preventDefault()
+              formik.submitForm()
+            }}
+            variant="cta"
+            sx={{
+              cursor: "pointer",
+              width: "100%",
+              fontWeight: 300,
+              padding: "25px",
+            }}
+          >
+            Go to payment
+          </Button>
+        )}
+      </Box>
+    </Box>
+  )
+}
+
+export default Forms
