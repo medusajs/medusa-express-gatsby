@@ -1,8 +1,8 @@
 {
-  "name": "one-click-checkout",
+  "name": "medusa-express",
   "version": "1.0.0",
   "private": true,
-  "description": "One Click Checkout",
+  "description": "Medusa Express - One-page checkout",
   "author": "Kasper",
   "keywords": [
     "gatsby"
