@@ -1,6 +1,5 @@
-import React, { useReducer, useEffect } from "react"
-
-import { client } from "../utils/client"
+import React, { useEffect, useReducer } from "react";
+import { client } from "../utils/client";
 
 const actions = {
   SET_CART: "SET_CART",
@@ -18,7 +17,7 @@ const actions = {
   SET_ORDER: "SET_ORDER",
   SET_ORDER_STATUS: "SET_ORDER_STATUS",
   SET_STATUS: "SET_STATUS",
-}
+};
 
 export const defaultOrderContext = {
   selectedRegion: {
@@ -53,10 +52,10 @@ export const defaultOrderContext = {
   clearContact: () => {},
   setDelivery: () => {},
   dispatch: () => {},
-}
+};
 
-const OrderContext = React.createContext(defaultOrderContext)
-export default OrderContext
+const OrderContext = React.createContext(defaultOrderContext);
+export default OrderContext;
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -64,49 +63,49 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedRegion: action.payload,
-      }
+      };
     case actions.SET_COUNTRY:
       return {
         ...state,
         countryName: action.payload,
-      }
+      };
     case actions.UPDATE_QUANTITY:
       return {
         ...state,
         quantity: action.payload,
-      }
+      };
     case actions.SET_VARIANT:
       return {
         ...state,
         variant: action.payload,
-      }
+      };
     case actions.SET_CONTACT:
       return {
         ...state,
         contact: action.payload,
-      }
+      };
     case actions.SET_STATUS:
       return {
         ...state,
         status: action.payload,
-      }
+      };
     case actions.SET_ORDER:
       return {
         ...state,
         order: action.payload,
-      }
+      };
     case actions.SET_ORDER_STATUS:
       return {
         ...state,
         orderStatus: action.payload,
-      }
+      };
     case actions.DESTROY_CART:
       return {
         ...state,
         cart: {
           items: [],
         },
-      }
+      };
     case actions.CLEAR_CONTACT:
       return {
         ...state,
@@ -116,132 +115,135 @@ const reducer = (state, action) => {
           email: "",
           phone: "",
         },
-      }
+      };
 
     case actions.SET_DELIVERY:
       return {
         ...state,
         delivery: action.payload,
-      }
+      };
     case actions.SET_SHIPPING:
       return {
         ...state,
         shipping: action.payload,
-      }
+      };
     case actions.SET_CART:
       if (localStorage) {
-        localStorage.setItem("cart_id", action.payload.id)
+        localStorage.setItem("cart_id", action.payload.id);
       }
       return {
         ...state,
         cart: action.payload,
-      }
+      };
   }
-}
+};
 
 export const OrderProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, defaultOrderContext)
+  const [state, dispatch] = useReducer(reducer, defaultOrderContext);
 
   useEffect(() => {
     const fetchOptions = async () => {
       if (state.cart.id) {
         const options = await client.shippingOptions
           .listCartOptions(state.cart.id)
-          .then(({ shipping_options }) => shipping_options)
-        dispatch({ type: actions.SET_SHIPPING, payload: options })
+          .then(({ shipping_options }) => shipping_options);
+        dispatch({ type: actions.SET_SHIPPING, payload: options });
       }
-    }
-    fetchOptions()
-  }, [state.cart.id])
+    };
+    fetchOptions();
+  }, [state.cart.id]);
 
   const completeOrder = async () => {
     if (state.cart && state.cart.id) {
-      dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+      dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" });
 
       try {
         await client.carts.setPaymentSession(state.cart.id, {
           provider_id: "stripe",
-        })
+        });
 
         return await client.carts
           .complete(state.cart.id)
           .then(({ data, type }) => {
-            dispatch({ type: actions.SET_ORDER_STATUS, payload: "completed" })
             if (type === "order") {
-              dispatch({ type: actions.SET_ORDER, payload: data })
+              dispatch({
+                type: actions.SET_ORDER_STATUS,
+                payload: "completed",
+              });
+              dispatch({ type: actions.SET_ORDER, payload: data });
             }
-          })
+          });
       } catch (err) {
         dispatch({
           type: actions.SET_ORDER_STATUS,
           payload: "completion_failed",
-        })
+        });
       }
     }
-  }
+  };
 
   const setOrderCompleting = () => {
-    dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
-  }
+    dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" });
+  };
 
   const setCountryName = (countryName) => {
-    dispatch({ type: actions.SET_COUNTRY, payload: countryName })
-  }
+    dispatch({ type: actions.SET_COUNTRY, payload: countryName });
+  };
 
   const selectRegion = (region) => {
-    dispatch({ type: actions.SET_REGION, payload: region })
-  }
+    dispatch({ type: actions.SET_REGION, payload: region });
+  };
 
   const selectVariant = (id) => {
-    dispatch({ type: actions.SET_VARIANT, payload: id })
-  }
+    dispatch({ type: actions.SET_VARIANT, payload: id });
+  };
 
   const updateQuantity = (quantity) => {
-    dispatch({ type: actions.UPDATE_QUANTITY, payload: quantity })
-  }
+    dispatch({ type: actions.UPDATE_QUANTITY, payload: quantity });
+  };
 
   const createCart = async (region, countryCode) => {
-    const { variant, quantity } = state
+    const { variant, quantity } = state;
 
     if (variant.id) {
-      dispatch({ type: actions.SET_STATUS, payload: "creating_cart" })
+      dispatch({ type: actions.SET_STATUS, payload: "creating_cart" });
       const { id } = await client.carts
         .create({
           region_id: region,
           country_code: countryCode,
         })
-        .then(({ cart }) => cart)
+        .then(({ cart }) => cart);
 
       await client.carts.lineItems.create(id, {
         variant_id: variant.id,
         quantity: quantity,
-      })
+      });
 
       const cart = await client.carts
         .createPaymentSessions(id)
-        .then(({ cart }) => cart)
+        .then(({ cart }) => cart);
 
-      dispatch({ type: actions.SET_STATUS, payload: "cart_created" })
+      dispatch({ type: actions.SET_STATUS, payload: "cart_created" });
 
-      dispatch({ type: actions.SET_CART, payload: cart })
+      dispatch({ type: actions.SET_CART, payload: cart });
     }
-  }
+  };
 
   const setContact = (contact) => {
-    dispatch({ type: actions.SET_CONTACT, payload: contact })
-  }
+    dispatch({ type: actions.SET_CONTACT, payload: contact });
+  };
 
   const setDelivery = (delivery) => {
-    dispatch({ type: actions.SET_DELIVERY, payload: delivery })
-  }
+    dispatch({ type: actions.SET_DELIVERY, payload: delivery });
+  };
 
   const clearContact = () => {
-    dispatch({ type: actions.CLEAR_CONTACT })
-  }
+    dispatch({ type: actions.CLEAR_CONTACT });
+  };
 
   const destroyCart = () => {
-    dispatch({ type: actions.DESTROY_CART })
-  }
+    dispatch({ type: actions.DESTROY_CART });
+  };
 
   const addShippingMethod = async (shippingId) => {
     return await client.carts
@@ -249,12 +251,13 @@ export const OrderProvider = ({ children }) => {
         option_id: shippingId,
       })
       .then(({ cart }) => {
-        dispatch({ type: actions.SET_CART, payload: cart })
-        return cart
-      })
-  }
+        dispatch({ type: actions.SET_CART, payload: cart });
+        return cart;
+      });
+  };
 
   const setDetails = async (contact, delivery) => {
+    dispatch({ type: actions.SET_STATUS, payload: "updating_cart" });
     return await client.carts
       .update(state.cart.id, {
         email: contact.email,
@@ -270,10 +273,11 @@ export const OrderProvider = ({ children }) => {
         },
       })
       .then(({ cart }) => {
-        dispatch({ type: actions.SET_CART, payload: cart })
-        return cart
-      })
-  }
+        dispatch({ type: actions.SET_CART, payload: cart });
+        dispatch({ type: actions.SET_STATUS, payload: "cart_updated" });
+        return cart;
+      });
+  };
 
   return (
     <OrderContext.Provider
@@ -297,5 +301,5 @@ export const OrderProvider = ({ children }) => {
     >
       {children}
     </OrderContext.Provider>
-  )
-}
+  );
+};

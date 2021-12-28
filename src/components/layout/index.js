@@ -1,38 +1,27 @@
-import React, { useContext, useMemo } from "react"
-import { Card, Flex, Box, Spinner, Text, Link } from "@theme-ui/components"
-import OrderContext from "../../context/order-context"
-import ProductSelection from "../product-selection"
-import OrderCompleter from "../order-completer"
-import Logo, { MedusaLogo, LogoText } from "./logo"
-import OuterLayout from "./layout"
+import { keyframes } from "@stitches/react";
+import React, { useMemo } from "react";
+import OuterLayout from "./layout";
 
-const Layout = ({ product, regions, country, regionId }) => {
-  const { cart } = useContext(OrderContext)
+const open = keyframes({
+  from: { height: 0 },
+  to: { height: "var(--radix-accordion-content-height)" },
+});
 
+const close = keyframes({
+  from: { height: "var(--radix-accordion-content-height)" },
+  to: { height: 0 },
+});
+
+const Layout = ({ children, regions, country, regionId }) => {
   const selectedRegion = useMemo(() => {
-    return regions.find((r) => r.id === regionId)
-  }, [regions, regionId])
+    return regions.find((r) => r.id === regionId);
+  }, [regions, regionId]);
 
   return (
-    <OuterLayout>
-      {product ? (
-        <>
-          {cart.items < 1 ? (
-            <ProductSelection
-              product={product}
-              regions={regions}
-              region={selectedRegion}
-              country={country}
-            />
-          ) : (
-            <OrderCompleter country={country} region={selectedRegion} />
-          )}
-        </>
-      ) : (
-        <Spinner />
-      )}
+    <OuterLayout region={selectedRegion} regions={regions} country={country}>
+      {children}
     </OuterLayout>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -1,8 +1,8 @@
-import { Box, Image } from "@theme-ui/components"
-import React from "react"
-import logo from "../../icons/logo.svg"
-import medusaSmall from "../../icons/medusa-small.svg"
-import logoText from "../../icons/logo-name.svg"
+import { Box, Image } from "@theme-ui/components";
+import React from "react";
+import logo from "../../icons/logo.svg";
+import medusaSmall from "../../icons/medusa-small.svg";
+import logoText from "../../icons/logo-name.svg";
 
 const Logo = () => {
   return (
@@ -15,12 +15,12 @@ const Logo = () => {
         }}
       />
     </Box>
-  )
-}
+  );
+};
 
 export const MedusaLogo = () => {
   return (
-    <Box sx={{ marginRight: "10px", height: "28px" }}>
+    <Box sx={{ marginRight: "4px", height: "16px", width: "15px" }}>
       <Image
         src={medusaSmall}
         sx={{
@@ -29,8 +29,8 @@ export const MedusaLogo = () => {
         }}
       />
     </Box>
-  )
-}
+  );
+};
 
 export const LogoText = () => {
   return (
@@ -43,7 +43,7 @@ export const LogoText = () => {
         }}
       />
     </Box>
-  )
-}
+  );
+};
 
-export default Logo
+export default Logo;

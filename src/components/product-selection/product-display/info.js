@@ -1,16 +1,18 @@
-import React, { useContext } from "react"
-import { Button, Flex, Text } from "@theme-ui/components"
-import OptionSelector from "./option-selector"
-import OrderContext from "../../../context/order-context"
-import { getFrom } from "../../../utils/get-from"
+import React, { useContext } from "react";
+import { Button, Flex, Text } from "@theme-ui/components";
+import OptionSelector from "./option-selector";
+import OrderContext from "../../../context/order-context";
+import { getFrom } from "../../../utils/get-from";
 
 const Info = ({ product, region }) => {
   return (
     <Flex
       sx={{
         flexDirection: "column",
-        justifyContent: "space-between",
-        pl: "3em",
+        justifyContent: "center",
+        width: "50%",
+        height: "100%",
+        px: "16px",
       }}
     >
       <Flex
@@ -20,33 +22,38 @@ const Info = ({ product, region }) => {
       >
         <Text
           sx={{
-            fontSize: ".75em",
-            fontWeight: "430",
+            fontSize: "12px",
+            fontWeight: 300,
+            mb: "8px",
+            color: "#6B7280",
+          }}
+        >
+          {product?.collection || "Bathrobes"}
+        </Text>
+        <Text
+          sx={{
+            fontSize: "14px",
+            fontWeight: 600,
+            mb: "8px",
+          }}
+        >
+          {product.title}
+        </Text>
+        <Text
+          sx={{
+            fontSize: "14px",
+            fontWeight: 300,
             mb: "1em",
           }}
         >
-          <Text mr={2} sx={{ color: "#B0B0B0" }}>
-            From
-          </Text>
           {`${getFrom(product.variants, {
             currency_code: region.currency_code,
             tax_rate: region.tax_rate,
           })}`}
         </Text>
-        <Text
-          my={1}
-          sx={{
-            fontSize: ".75em",
-            fontWeight: "400",
-          }}
-          variant="fz_s"
-        >
-          {product.description}
-        </Text>
-        <OptionSelector product={product} />
       </Flex>
     </Flex>
-  )
-}
+  );
+};
 
-export default Info
+export default Info;

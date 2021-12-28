@@ -1,41 +1,41 @@
-import React from "react"
-import { Card, Flex, Text, Link } from "@theme-ui/components"
-import Logo, { MedusaLogo, LogoText } from "./logo"
+import { Flex, Link, Text } from "@theme-ui/components";
+import React from "react";
+import RegionSelector from "../product-selection/region-selector";
+import { MedusaLogo } from "./logo";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, country, regions }) => {
   return (
-    <Flex sx={{ width: "100%", flexDirection: "column" }}>
+    <Flex
+      sx={{
+        width: "100%",
+        flexDirection: "column",
+        backgroundColor: "#F3F4F6",
+      }}
+    >
       <Flex
         sx={{
-          justifyContent: "space-between",
+          justifyContent: ["center", "space-between"],
           alignItems: "center",
-          flexDirection: "column",
+          flexDirection: ["column", "row"],
           minHeight: "100vh",
           paddingTop: "2em",
         }}
       >
-        <Logo />
-        <Card
-          variant="container"
-          sx={{
-            bg: "white",
-            my: "2em",
-            width: "700px",
-            height: "auto",
-            p: "1.5em",
-            borderRadius: "8px",
-            justifyContent: "center",
-            transition: "all .2s linear",
-          }}
-        >
-          <LogoText />
-          {children}
-        </Card>
         <Flex
           sx={{
-            justifyContent: "center",
+            justifyContent: ["center", "flex-end"],
+            alignItems: "center",
+            width: ["100%", "50%"],
+          }}
+        >
+          {children}
+        </Flex>
+        <Flex
+          sx={{
+            justifyContent: ["center", "flex-start"],
             paddingTop: "10px",
-            width: "100%",
+            paddingLeft: [0, "100px"],
+            width: "50%",
             height: "100px",
             backgroundColor: "#F3F3F6",
           }}
@@ -45,17 +45,18 @@ const Layout = ({ children }) => {
               paddingTop: "10px",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <Text
               sx={{
                 fontWeight: "500",
-                fontSize: "0.7em",
+                fontSize: "10px",
                 color: "#A3A3A3",
                 letterSpacing: "4px",
               }}
             >
-              POWERED BY
+              Powered by
             </Text>
             <Link
               sx={{
@@ -70,18 +71,22 @@ const Layout = ({ children }) => {
                   sx={{
                     color: "#A3A3A3",
                     fontWeight: 500,
-                    fontSize: "1.2em",
+                    fontSize: "14px",
+                    lineHeight: "1",
                   }}
                 >
-                  Medusa
+                  medusa
                 </Text>
               </Flex>
             </Link>
+            {regions?.length && (
+              <RegionSelector selected={country} regions={regions} />
+            )}
           </Flex>
         </Flex>
       </Flex>
     </Flex>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

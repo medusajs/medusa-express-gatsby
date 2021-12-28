@@ -1,8 +1,7 @@
 const theme = {
   fonts: {
-    body:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading: "Georgia, serif",
+    body: "Inter",
+    heading: "Inter",
   },
   fontWeights: {
     body: 400,
@@ -10,7 +9,7 @@ const theme = {
   },
   breakpoints: ["720px"],
   colors: {
-    primary: "#0A3149",
+    primary: "#111827",
     medusaGreen: "#56FBB1",
     medusa100: "#454B54",
     deepBlue: "#0A3149",
@@ -19,11 +18,32 @@ const theme = {
     background: "#F7F7FA",
     salmon: "#FF9B9B",
     placeholder: "#BBBBBB",
+    grey: "#E5E7EB",
+    darkGrey: "#6B7280",
   },
   cards: {
+    accordionTrigger: {
+      bg: "white",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "375px",
+      borderRadius: "8px",
+      transition: "all .2s linear",
+      fontFamily: "Inter",
+      fontWeight: "600",
+      px: "24px",
+      py: "16px",
+    },
     container: {
-      boxShadow:
-        "0px 1px 1px rgba(0, 0, 0, 0.12), 0px 0px 0px 1px rgba(60, 66, 87, 0.16), 0px 2px 5px rgba(60, 66, 87, 0.08)",
+      bg: "white",
+      width: "375px",
+      px: "24px",
+      py: "16px",
+      height: "auto",
+      borderRadius: "8px",
+      justifyContent: "center",
+      transition: "all .2s linear",
     },
   },
   buttons: {
@@ -31,12 +51,12 @@ const theme = {
       bg: "primary",
       color: "white",
       fontWeight: "500",
-      height: "30px",
+      fontSize: "14px",
+      height: "40px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       width: "100%",
-      padding: "25px",
       cursor: "pointer",
     },
     incrementor: {
@@ -84,11 +104,15 @@ const theme = {
       fontSize: "10px",
     },
     header3: {
-      fontSize: "18px",
-      fontWeight: "700",
+      fontSize: "16px",
+      fontWeight: "600",
     },
     summary: {
       py: ".1em",
+      fontSize: "12px",
+      color: "darkGrey",
+      fontFamily: "Inter",
+      fontWeight: 300,
     },
     termsLink: {
       textDecoration: "none",
@@ -103,8 +127,8 @@ const theme = {
       fontWeight: "300",
     },
     subheading: {
-      fontSize: "1.1em",
-      fontWeight: 550,
+      fontSize: "12px",
+      fontWeight: 600,
       color: "black",
     },
   },
@@ -119,17 +143,17 @@ const theme = {
       border: "none",
     },
     field: {
-      border: "2px solid background",
+      border: "1px solid grey",
       "::placeholder": {
-        color: "placeholder",
+        color: "darkGrey",
       },
       ":-ms-input-placeholder": {
-        color: "placeholder",
+        color: "darkGrey",
       },
       "::-ms-input-placeholder": {
-        color: "placeholder",
+        color: "darkGrey",
       },
-      backgroundColor: "background",
+      outline: "none",
       transition: "all .2s linear",
     },
   },
@@ -140,6 +164,6 @@ const theme = {
       background: "ui",
     },
   },
-}
+};
 
-export default theme
+export default theme;
