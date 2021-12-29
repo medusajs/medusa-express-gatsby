@@ -1,7 +1,7 @@
-import { Flex, Link, Text } from "@theme-ui/components";
-import React from "react";
-import RegionSelector from "../product-selection/region-selector";
-import { MedusaLogo } from "./logo";
+import { Flex, Link, Text } from "@theme-ui/components"
+import React from "react"
+import RegionSelector from "../product-selection/region-selector"
+import { MedusaLogo } from "./logo"
 
 const Layout = ({ children, country, regions }) => {
   return (
@@ -86,7 +86,7 @@ const Layout = ({ children, country, regions }) => {
         </Flex>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

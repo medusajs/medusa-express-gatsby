@@ -1,8 +1,8 @@
-import { Card, Flex, Image } from "@theme-ui/components";
-import React, { useContext } from "react";
-import OrderContext from "../../context/order-context";
-import Checkmark from "../../images/check.png";
-import ProductSelection from "../product-selection";
+import { Card, Flex, Image } from "@theme-ui/components"
+import React, { useContext } from "react"
+import OrderContext from "../../context/order-context"
+import Checkmark from "../../images/check.png"
+import ProductSelection from "../product-selection"
 
 const Steps = ({
   product,
@@ -12,8 +12,8 @@ const Steps = ({
   activeStep,
   setActiveStep,
 }) => {
-  const { cart } = useContext(OrderContext);
-  const cartCreated = cart?.id;
+  const { cart } = useContext(OrderContext)
+  const cartCreated = cart?.id
 
   return (
     <Flex sx={{ width: "100%", height: "100%", mb: "8px" }}>
@@ -38,7 +38,7 @@ const Steps = ({
         </Card>
       )}
     </Flex>
-  );
-};
+  )
+}
 
-export default Steps;
+export default Steps

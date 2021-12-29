@@ -1,5 +1,5 @@
-import { Flex, Box } from "@theme-ui/components";
-import React from "react";
+import { Flex, Box } from "@theme-ui/components"
+import React from "react"
 
 const FieldSplitter = ({ left, right }) => {
   return (
@@ -26,7 +26,7 @@ const FieldSplitter = ({ left, right }) => {
         {right}
       </Box>
     </Flex>
-  );
-};
+  )
+}
 
-export default FieldSplitter;
+export default FieldSplitter

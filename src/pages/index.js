@@ -1,8 +1,8 @@
-import { graphql, navigate } from "gatsby";
-import * as React from "react";
-import { Card, Flex, Image, Text } from "theme-ui";
-import Layout from "../components/layout/layout";
-import Github from "../images/github.png";
+import { graphql, navigate } from "gatsby"
+import * as React from "react"
+import { Card, Flex, Image, Text } from "theme-ui"
+import Layout from "../components/layout/layout"
+import Github from "../images/github.png"
 
 const IndexPage = ({ data }) => {
   return (
@@ -60,8 +60,8 @@ const IndexPage = ({ data }) => {
         </Card>
       </Layout>
     </main>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query {
@@ -74,6 +74,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default IndexPage;
+export default IndexPage

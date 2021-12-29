@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Input, Flex } from "@theme-ui/components";
+import React, { useEffect, useState } from "react"
+import { Input, Flex } from "@theme-ui/components"
 
 const Field = ({ formik, value, name, set, placeholder, disabled }) => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
 
-  const placeholderColor = "#BBBBBB";
+  const placeholderColor = "#BBBBBB"
 
   useEffect(() => {
     if (formik.errors[set]?.[name] && formik.touched[set]?.[name]) {
-      setError(true);
+      setError(true)
     } else {
-      setError(false);
+      setError(false)
     }
-  }, [formik.errors]);
+  }, [formik.errors])
   return (
     <Flex
       sx={{
@@ -37,7 +37,7 @@ const Field = ({ formik, value, name, set, placeholder, disabled }) => {
         variant="field"
       />
     </Flex>
-  );
-};
+  )
+}
 
-export default Field;
+export default Field

@@ -1,20 +1,20 @@
-import { Flex } from "@theme-ui/components";
-import React, { useContext, useMemo, useState } from "react";
-import OrderContext from "../../context/order-context";
-import Spinner from "../spinner/spinner";
-import Payment from "./payment";
-import Product from "./product";
-import Shipping from "./shipping";
+import { Flex } from "@theme-ui/components"
+import React, { useContext, useMemo, useState } from "react"
+import OrderContext from "../../context/order-context"
+import Spinner from "../spinner/spinner"
+import Payment from "./payment"
+import Product from "./product"
+import Shipping from "./shipping"
 
 const Steps = ({ product, regions, country, regionId }) => {
-  const [activeStep, setActiveStep] = useState("product");
-  const { status, orderStatus } = useContext(OrderContext);
+  const [activeStep, setActiveStep] = useState("product")
+  const { status, orderStatus } = useContext(OrderContext)
 
   const selectedRegion = useMemo(() => {
-    return regions.find((r) => r.id === regionId);
-  }, [regions, regionId]);
+    return regions.find(r => r.id === regionId)
+  }, [regions, regionId])
 
-  const loadingStates = ["creating_cart", "completing", "updating_cart"];
+  const loadingStates = ["creating_cart", "completing", "updating_cart"]
 
   return (
     <Flex sx={{ flexDirection: "column" }}>
@@ -55,7 +55,7 @@ const Steps = ({ product, regions, country, regionId }) => {
         activeStep={activeStep}
       />
     </Flex>
-  );
-};
+  )
+}
 
-export default Steps;
+export default Steps

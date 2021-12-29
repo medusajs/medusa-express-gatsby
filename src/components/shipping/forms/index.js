@@ -1,19 +1,19 @@
-import { Box, Button, Divider, Text } from "@theme-ui/components";
-import { useFormik } from "formik";
-import React, { useContext, useState } from "react";
-import * as Yup from "yup";
-import OrderContext from "../../../context/order-context";
-import Contact from "./contact";
-import Delivery from "./delivery";
+import { Box, Button, Divider, Text } from "@theme-ui/components"
+import { useFormik } from "formik"
+import React, { useContext, useState } from "react"
+import * as Yup from "yup"
+import OrderContext from "../../../context/order-context"
+import Contact from "./contact"
+import Delivery from "./delivery"
 
 const Forms = ({ country, region, nextStep }) => {
   const { contact, delivery, setDelivery, setContact, setDetails } =
-    useContext(OrderContext);
+    useContext(OrderContext)
 
   const [isValid, setIsValid] = useState({
     contact: false,
     delivery: false,
-  });
+  })
 
   const formik = useFormik({
     initialValues: {
@@ -48,15 +48,15 @@ const Forms = ({ country, region, nextStep }) => {
         shipping_option: Yup.string().required("Required"),
       }),
     }),
-    onSubmit: async (values) => {
-      setIsValid({ delivery: true, contact: true });
-      setDelivery(values.delivery);
-      setContact(values.contact);
+    onSubmit: async values => {
+      setIsValid({ delivery: true, contact: true })
+      setDelivery(values.delivery)
+      setContact(values.contact)
       return setDetails(values.contact, values.delivery).finally(() =>
         nextStep()
-      );
+      )
     },
-  });
+  })
 
   return (
     <Box>
@@ -80,9 +80,9 @@ const Forms = ({ country, region, nextStep }) => {
         <>
           <Divider sx={{ color: "#E5E7EB", my: "16px" }} />
           <Button
-            onClick={(e) => {
-              e.preventDefault();
-              formik.submitForm();
+            onClick={e => {
+              e.preventDefault()
+              formik.submitForm()
             }}
             variant="cta"
             sx={{
@@ -95,7 +95,7 @@ const Forms = ({ country, region, nextStep }) => {
         </>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Forms;
+export default Forms

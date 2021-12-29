@@ -1,28 +1,28 @@
-import { Box, Divider, Flex, Text } from "@theme-ui/components";
-import React, { useContext, useEffect, useState } from "react";
-import { Button } from "theme-ui";
-import OrderContext from "../../context/order-context";
-import { client } from "../../utils/client";
-import ProductDisplay from "./product-display";
+import { Box, Divider, Flex, Text } from "@theme-ui/components"
+import React, { useContext, useEffect, useState } from "react"
+import { Button } from "theme-ui"
+import OrderContext from "../../context/order-context"
+import { client } from "../../utils/client"
+import ProductDisplay from "./product-display"
 
 const ProductSelection = ({ product, region, country, nextStep }) => {
-  const { createCart, status } = useContext(OrderContext);
-  const [inventory, setInventory] = useState({});
+  const { createCart, status } = useContext(OrderContext)
+  const [inventory, setInventory] = useState({})
 
   useEffect(() => {
     client.products.retrieve(product.id).then(({ product: details }) => {
       const inventoryObj = details.variants.reduce((acc, next) => {
-        acc[next.id] = next.inventory_quantity;
-        return acc;
-      }, {});
+        acc[next.id] = next.inventory_quantity
+        return acc
+      }, {})
 
-      setInventory(inventoryObj);
-    });
-  }, [product]);
+      setInventory(inventoryObj)
+    })
+  }, [product])
 
   const handleSubmit = () => {
-    createCart(region.id, country).finally(() => nextStep());
-  };
+    createCart(region.id, country).finally(() => nextStep())
+  }
 
   return (
     <Box>
@@ -39,7 +39,7 @@ const ProductSelection = ({ product, region, country, nextStep }) => {
         Continue
       </Button>
     </Box>
-  );
-};
+  )
+}
 
-export default ProductSelection;
+export default ProductSelection

@@ -1,9 +1,9 @@
-import { Flex, Text } from "@theme-ui/components";
-import React, { useContext } from "react";
-import OrderContext from "../../context/order-context";
+import { Flex, Text } from "@theme-ui/components"
+import React, { useContext } from "react"
+import OrderContext from "../../context/order-context"
 
 const Total = () => {
-  const { cart } = useContext(OrderContext);
+  const { cart } = useContext(OrderContext)
 
   return (
     <Flex
@@ -60,7 +60,7 @@ const Total = () => {
         </Text>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default Total;
+export default Total

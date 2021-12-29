@@ -164,6 +164,6 @@ const theme = {
       background: "ui",
     },
   },
-};
+}
 
-export default theme;
+export default theme

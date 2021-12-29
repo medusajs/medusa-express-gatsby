@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { Button, Flex, Text } from "@theme-ui/components";
-import OptionSelector from "./option-selector";
-import OrderContext from "../../../context/order-context";
-import { getFrom } from "../../../utils/get-from";
+import React, { useContext } from "react"
+import { Button, Flex, Text } from "@theme-ui/components"
+import OptionSelector from "./option-selector"
+import OrderContext from "../../../context/order-context"
+import { getFrom } from "../../../utils/get-from"
 
 const Info = ({ product, region }) => {
   return (
@@ -53,7 +53,7 @@ const Info = ({ product, region }) => {
         </Text>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default Info;
+export default Info

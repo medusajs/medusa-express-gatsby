@@ -1,27 +1,27 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { Box, Button, Flex, Text } from "@theme-ui/components";
-import React, { useContext, useState } from "react";
-import OrderContext from "../../context/order-context";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { Box, Button, Flex, Text } from "@theme-ui/components"
+import React, { useContext, useState } from "react"
+import OrderContext from "../../context/order-context"
 
 const PaymentForm = ({ session }) => {
-  const [errorMessage, setErrorMessage] = useState();
-  const { cart, completeOrder, setOrderCompleting } = useContext(OrderContext);
+  const [errorMessage, setErrorMessage] = useState()
+  const { cart, completeOrder, setOrderCompleting } = useContext(OrderContext)
 
-  const stripe = useStripe();
-  const elements = useElements();
+  const stripe = useStripe()
+  const elements = useElements()
 
-  const handlePayment = async (e) => {
-    e.preventDefault();
+  const handlePayment = async e => {
+    e.preventDefault()
 
-    setOrderCompleting();
+    setOrderCompleting()
 
     if (!stripe || !elements) {
-      return;
+      return
     }
 
-    const { client_secret } = session.data;
-    const email = cart.email;
-    const address = cart.shipping_address;
+    const { client_secret } = session.data
+    const email = cart.email
+    const address = cart.shipping_address
 
     return stripe
       .confirmCardPayment(client_secret, {
@@ -43,29 +43,29 @@ const PaymentForm = ({ session }) => {
       })
       .then(({ error, paymentIntent }) => {
         if (error) {
-          const pi = error.payment_intent;
+          const pi = error.payment_intent
 
           if (
             (pi && pi.status === "requires_capture") ||
             (pi && pi.status === "succeeded")
           ) {
-            return completeOrder();
+            return completeOrder()
           }
 
-          setErrorMessage(error.message);
-          return;
+          setErrorMessage(error.message)
+          return
         }
 
         if (
           (paymentIntent && paymentIntent.status === "requires_capture") ||
           paymentIntent.status === "succeeded"
         ) {
-          return completeOrder();
+          return completeOrder()
         }
 
-        return;
-      });
-  };
+        return
+      })
+  }
 
   return (
     <form onSubmit={handlePayment}>
@@ -77,6 +77,6 @@ const PaymentForm = ({ session }) => {
         <Button variant="cta">Complete order</Button>
       </Flex>
     </form>
-  );
-};
-export default PaymentForm;
+  )
+}
+export default PaymentForm

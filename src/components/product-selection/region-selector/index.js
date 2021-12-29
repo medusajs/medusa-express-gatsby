@@ -1,17 +1,17 @@
-import { Box, Flex, Select, Text } from "@theme-ui/components";
-import { navigate } from "gatsby";
-import React from "react";
+import { Box, Flex, Select, Text } from "@theme-ui/components"
+import { navigate } from "gatsby"
+import React from "react"
 
 const RegionSelector = ({ selected, regions }) => {
-  const handleChange = (e) => {
-    const [_, countryOrHandle, handle] = window.location.pathname.split("/");
+  const handleChange = e => {
+    const [_, countryOrHandle, handle] = window.location.pathname.split("/")
 
     if (!handle) {
-      navigate(`/${e.target.value}/${countryOrHandle}`);
+      navigate(`/${e.target.value}/${countryOrHandle}`)
     } else {
-      navigate(`/${e.target.value}/${handle}`);
+      navigate(`/${e.target.value}/${handle}`)
     }
-  };
+  }
 
   return (
     <Flex
@@ -62,17 +62,17 @@ const RegionSelector = ({ selected, regions }) => {
       >
         {regions?.length &&
           regions.map((r, i) => {
-            return r.countries.map((country) => {
+            return r.countries.map(country => {
               return (
                 <option key={country.iso_2} value={country.iso_2}>
                   {country.display_name}
                 </option>
-              );
-            });
+              )
+            })
           })}
       </Select>
     </Flex>
-  );
-};
+  )
+}
 
-export default RegionSelector;
+export default RegionSelector

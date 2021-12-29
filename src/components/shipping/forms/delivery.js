@@ -1,9 +1,9 @@
-import { Box, Text } from "@theme-ui/components";
-import React, { useContext, useEffect, useState } from "react";
-import OrderContext from "../../../context/order-context";
-import Field from "./field";
-import FieldSplitter from "./field-splitter";
-import SelectShipping from "./select-shipping";
+import { Box, Text } from "@theme-ui/components"
+import React, { useContext, useEffect, useState } from "react"
+import OrderContext from "../../../context/order-context"
+import Field from "./field"
+import FieldSplitter from "./field-splitter"
+import SelectShipping from "./select-shipping"
 
 const Delivery = ({
   formik,
@@ -13,18 +13,16 @@ const Delivery = ({
   country,
   summarize,
 }) => {
-  const { delivery, setCountryName } = useContext(OrderContext);
-  const [fullCountry, setFullCountry] = useState("");
+  const { delivery, setCountryName } = useContext(OrderContext)
+  const [fullCountry, setFullCountry] = useState("")
   useEffect(() => {
-    formik.setFieldValue("delivery.country_code", country);
-  }, [country]);
+    formik.setFieldValue("delivery.country_code", country)
+  }, [country])
 
   useEffect(() => {
-    setFullCountry(
-      region.countries.find((c) => c.iso_2 === country).display_name
-    );
-    setCountryName(fullCountry);
-  }, [country, region]);
+    setFullCountry(region.countries.find(c => c.iso_2 === country).display_name)
+    setCountryName(fullCountry)
+  }, [country, region])
 
   return (
     <Box as="form">
@@ -79,7 +77,7 @@ const Delivery = ({
         />
       </>
     </Box>
-  );
-};
+  )
+}
 
-export default Delivery;
+export default Delivery

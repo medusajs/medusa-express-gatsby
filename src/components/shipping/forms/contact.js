@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Box, Text, Flex, Button } from "@theme-ui/components";
-import Field from "./field";
-import OrderContext from "../../../context/order-context";
-import FieldSplitter from "./field-splitter";
+import React, { useContext } from "react"
+import { Box, Text, Flex, Button } from "@theme-ui/components"
+import Field from "./field"
+import OrderContext from "../../../context/order-context"
+import FieldSplitter from "./field-splitter"
 
 const Contact = ({ formik, isValid, setIsValid, summarize = false }) => {
-  const { contact } = useContext(OrderContext);
+  const { contact } = useContext(OrderContext)
 
   return (
     <Box as="form">
@@ -84,7 +84,7 @@ const Contact = ({ formik, isValid, setIsValid, summarize = false }) => {
         </Flex>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

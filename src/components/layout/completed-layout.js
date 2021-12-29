@@ -1,20 +1,20 @@
-import { Card, Flex } from "@theme-ui/components";
-import React, { useEffect, useState } from "react";
-import { client } from "../../utils/client";
-import OrderConfirmation from "../steps/order-confirmation";
-import Layout from "./layout";
+import { Card, Flex } from "@theme-ui/components"
+import React, { useEffect, useState } from "react"
+import { client } from "../../utils/client"
+import OrderConfirmation from "../steps/order-confirmation"
+import Layout from "./layout"
 
 const CompletedLayout = () => {
-  const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState(null)
 
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const id = urlSearchParams.get("id");
-    client.orders.retrieve(id).then(({ order: res }) => setOrder(res));
-  }, []);
+    const urlSearchParams = new URLSearchParams(window.location.search)
+    const id = urlSearchParams.get("id")
+    client.orders.retrieve(id).then(({ order: res }) => setOrder(res))
+  }, [])
 
   if (!order) {
-    return null;
+    return null
   }
 
   return (
@@ -33,7 +33,7 @@ const CompletedLayout = () => {
         ></Flex>
       </Card>
     </Layout>
-  );
-};
+  )
+}
 
-export default CompletedLayout;
+export default CompletedLayout

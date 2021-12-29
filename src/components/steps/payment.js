@@ -1,10 +1,10 @@
-import { Box, Card, Flex, Text } from "@theme-ui/components";
-import { navigate } from "gatsby";
-import React, { useContext, useEffect, useState } from "react";
-import OrderContext from "../../context/order-context";
-import PaymentDetails from "../payment/payment";
-import Review from "../payment/review";
-import Total from "../payment/total";
+import { Box, Card, Flex, Text } from "@theme-ui/components"
+import { navigate } from "gatsby"
+import React, { useContext, useEffect, useState } from "react"
+import OrderContext from "../../context/order-context"
+import PaymentDetails from "../payment/payment"
+import Review from "../payment/review"
+import Total from "../payment/total"
 
 const DeliveryReview = ({ delivery, displayCountry }) => (
   <Flex
@@ -22,40 +22,40 @@ const DeliveryReview = ({ delivery, displayCountry }) => (
     <Text variant="summary">{`${delivery.postal_code}, ${delivery.city}`}</Text>
     <Text variant="summary">{displayCountry}</Text>
   </Flex>
-);
+)
 
 const Payment = ({ region, country, activeStep }) => {
-  const [fullCountry, setFullCountry] = useState("");
+  const [fullCountry, setFullCountry] = useState("")
   const { delivery, setCountryName, order, orderStatus } =
-    useContext(OrderContext);
-  const [shouldNavigate, setShouldNavigate] = useState(false);
+    useContext(OrderContext)
+  const [shouldNavigate, setShouldNavigate] = useState(false)
 
   useEffect(() => {
     if (activeStep === "payment") {
       setFullCountry(
-        region.countries.find((c) => c.iso_2 === country).display_name
-      );
-      setCountryName(fullCountry);
+        region.countries.find(c => c.iso_2 === country).display_name
+      )
+      setCountryName(fullCountry)
     }
-  }, [country, region, activeStep]);
+  }, [country, region, activeStep])
 
   useEffect(() => {
     if (orderStatus === "completed") {
       const timeout = setTimeout(() => {
-        setShouldNavigate(true);
-      }, 200);
+        setShouldNavigate(true)
+      }, 200)
 
       return () => {
-        clearTimeout(timeout);
-      };
+        clearTimeout(timeout)
+      }
     }
-  }, [orderStatus]);
+  }, [orderStatus])
 
   useEffect(() => {
     if (shouldNavigate && order?.id) {
-      navigate(`/completed?id=${order.id}`);
+      navigate(`/completed?id=${order.id}`)
     }
-  }, [order?.id, shouldNavigate]);
+  }, [order?.id, shouldNavigate])
 
   return (
     <Flex sx={{ width: "100%", height: "100%", mb: "8px" }}>
@@ -82,7 +82,7 @@ const Payment = ({ region, country, activeStep }) => {
         <Card variant="accordionTrigger">Payment</Card>
       )}
     </Flex>
-  );
-};
+  )
+}
 
-export default Payment;
+export default Payment

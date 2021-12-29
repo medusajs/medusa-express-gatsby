@@ -1,7 +1,7 @@
-import { Flex, Image, Text } from "@theme-ui/components";
-import React from "react";
-import Info from "./info";
-import OptionSelector from "./option-selector";
+import { Flex, Image, Text } from "@theme-ui/components"
+import React from "react"
+import Info from "./info"
+import OptionSelector from "./option-selector"
 
 const ProductDisplay = ({ showSpinner, region, product }) => {
   return product ? (
@@ -33,7 +33,7 @@ const ProductDisplay = ({ showSpinner, region, product }) => {
       </Text>
       <OptionSelector product={product} />
     </Flex>
-  ) : null;
-};
+  ) : null
+}
 
-export default ProductDisplay;
+export default ProductDisplay

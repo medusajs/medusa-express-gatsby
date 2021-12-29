@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Flex, Text } from "@theme-ui/components";
+import React, { useContext } from "react"
+import { Flex, Text } from "@theme-ui/components"
 
-import OrderContext from "../../context/order-context";
+import OrderContext from "../../context/order-context"
 
 const BreadCrumbs = ({ sx, step }) => {
-  const { destroyCart } = useContext(OrderContext);
+  const { destroyCart } = useContext(OrderContext)
 
   const inBreadcrumbs = {
     flex: "none",
@@ -14,7 +14,7 @@ const BreadCrumbs = ({ sx, step }) => {
     letterSpacing: "0.1em",
     color: "#B0B0B0",
     mr: 1,
-  };
+  }
 
   const visited = {
     cursor: "pointer",
@@ -25,7 +25,7 @@ const BreadCrumbs = ({ sx, step }) => {
     letterSpacing: "0.1em",
     color: "#454545",
     mr: 1,
-  };
+  }
 
   return (
     <Flex sx={sx}>
@@ -37,7 +37,7 @@ const BreadCrumbs = ({ sx, step }) => {
       <Text sx={step > 1 ? visited : inBreadcrumbs}>></Text>
       <Text sx={step > 1 ? visited : inBreadcrumbs}>Payment</Text>
     </Flex>
-  );
-};
+  )
+}
 
-export default BreadCrumbs;
+export default BreadCrumbs

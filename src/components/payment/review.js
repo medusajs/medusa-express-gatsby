@@ -1,12 +1,12 @@
-import { Flex, Image, Text } from "@theme-ui/components";
-import React, { useContext, useMemo } from "react";
-import OrderContext from "../../context/order-context";
+import { Flex, Image, Text } from "@theme-ui/components"
+import React, { useContext, useMemo } from "react"
+import OrderContext from "../../context/order-context"
 
 const Review = () => {
-  const { cart, destroyCart } = useContext(OrderContext);
+  const { cart, destroyCart } = useContext(OrderContext)
   const item = useMemo(() => {
-    return cart.items[0];
-  }, [cart.items]);
+    return cart.items[0]
+  }, [cart.items])
 
   return (
     <Flex
@@ -51,7 +51,7 @@ const Review = () => {
         </Text>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default Review;
+export default Review

@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import OrderContext from "../../../context/order-context";
-import { Text, Box, Flex, Label, Radio, Select } from "@theme-ui/components";
-import { formatMoney } from "../../../utils/format-money";
+import React, { useContext, useState, useEffect } from "react"
+import OrderContext from "../../../context/order-context"
+import { Text, Box, Flex, Label, Radio, Select } from "@theme-ui/components"
+import { formatMoney } from "../../../utils/format-money"
 
 const ShippingOption = ({ selected, option, region, onClick }) => {
   return (
@@ -62,26 +62,26 @@ const ShippingOption = ({ selected, option, region, onClick }) => {
         </>
       )}
     </Flex>
-  );
-};
+  )
+}
 
 const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
-  const { cart, shipping, addShippingMethod } = useContext(OrderContext);
-  const [added, setAdded] = useState("");
+  const { cart, shipping, addShippingMethod } = useContext(OrderContext)
+  const [added, setAdded] = useState("")
 
-  const handleClick = async (id) => {
-    setAdded(id);
-    formik.setFieldValue(`${set}.${name}`, id);
-    await addShippingMethod(id);
-    setAdded("");
-  };
+  const handleClick = async id => {
+    setAdded(id)
+    formik.setFieldValue(`${set}.${name}`, id)
+    await addShippingMethod(id)
+    setAdded("")
+  }
 
   return (
     <Flex sx={{ flexDirection: "column" }}>
-      {shipping.map((s) => {
+      {shipping.map(s => {
         const res = cart.shipping_methods.find(
-          (so) => s.id === so.shipping_option_id
-        );
+          so => s.id === so.shipping_option_id
+        )
         return (
           <ShippingOption
             key={s.id}
@@ -90,10 +90,10 @@ const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
             option={s}
             region={region}
           />
-        );
+        )
       })}
     </Flex>
-  );
-};
+  )
+}
 
-export default SelectShipping;
+export default SelectShipping
