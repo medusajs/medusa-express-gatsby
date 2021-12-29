@@ -1,10 +1,10 @@
-import { navigate } from "gatsby";
+import { graphql, navigate } from "gatsby";
 import * as React from "react";
 import { Card, Flex, Image, Text } from "theme-ui";
 import Layout from "../components/layout/layout";
 import Github from "../images/github.png";
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
   return (
     <main>
       <Layout>
@@ -44,7 +44,7 @@ const IndexPage = () => {
                 fontWeight: 500,
                 cursor: "pointer",
               }}
-              onClick={() => navigate("/dk/basic-shirt")}
+              onClick={() => navigate(`/${data.product.edges[0].node.handle}`)}
             >
               Explore the demo
             </Text>
@@ -62,5 +62,18 @@ const IndexPage = () => {
     </main>
   );
 };
+
+export const query = graphql`
+  query {
+    product: allMedusaProduct(limit: 1) {
+      edges {
+        node {
+          id
+          handle
+        }
+      }
+    }
+  }
+`;
 
 export default IndexPage;
