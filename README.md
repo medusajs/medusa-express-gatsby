@@ -1,54 +1,80 @@
 <p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+  <a href="https://nextjs.org/">
+    <img alt="Next.js" src="https://i.imgur.com/Ey8OMA7.png" width="200" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby minimal starter
+  Medusa Express
 </h1>
+<p align="center">
+Medusa is an open-source headless commerce engine that enables developers to create amazing digital commerce experiences.
+</p>
+<p align="center">
+  <a href="https://github.com/medusajs/medusa/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Medusa is released under the MIT license." />
+  </a>
+  <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
+  </a>
+  <a href="https://discord.gg/xpCwq3Kfn8">
+    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
+  </a>
+  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
+    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
+  </a>
+</p>
 
-## 🚀 Quick start
+<br/>
 
-1.  **Create a Gatsby site.**
+**Prerequisites**: To use Medusa Express, you need a Medusa server. Check out [medusa-starter-default](https://github.com/medusajs/medusa-starter-default) for a quick setup.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+<br/>
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+## 🚀 Get started!
 
-2.  **Start developing.**
+### 1. Create your Medusa Express project
 
-    Navigate into your new site’s directory and start it up.
+```zsh  
+  gatsby new medusa-express https://github.com/medusajs/medusa-express
+  
+  # or with npx
+  
+  npx gatsby new medusa-express https://github.com/medusajs/medusa-express
+  
+  # or via Git
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+  git clone https://github.com/medusajs/medusa-express.git medusa-express
+```
 
-3.  **Open the code and start customizing!**
+### 2. Install dependencies
 
-    Your site is now running at http://localhost:8000!
+```zsh
+  cd medusa-express
+  
+  yarn
+  # or
+  npm install
+```
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+### 3. Link your Medusa server
 
-4.  **Learn more**
+In your project, you should have a `.env.template` file with the following content:
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+```shell
+GATSBY_MEDUSA_BACKEND_URL=http://localhost:9000
+```
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Copy the template into a file used for local development:
+```zsh
+mv .env.template .env.development
+```
 
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Your Medusa server runs locally on port 9000 by default. Make sure to update the above environment variable, if you've changed the port.
 
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+### 4. Try it out!
 
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Start up both your Medusa server and Medusa Express and try it out!
 
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+Medusa Express is running at `http://localhost:8000`!
 
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+> Remeber to either seed your Medusa server with some dummy products, or create your own through Medusa Admin.
