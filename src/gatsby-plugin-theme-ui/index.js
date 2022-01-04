@@ -1,7 +1,8 @@
 const theme = {
   fonts: {
-    body: "Inter",
-    heading: "Inter",
+    body: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif",
+    heading:
+      "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif",
   },
   fontWeights: {
     body: 400,
