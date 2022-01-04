@@ -58,6 +58,10 @@ const theme = {
       justifyContent: "center",
       width: "100%",
       cursor: "pointer",
+      "&:disabled": {
+        opacity: 0.5,
+        cursor: "default",
+      },
     },
     incrementor: {
       bg: "transparent",
@@ -113,6 +117,21 @@ const theme = {
       color: "darkGrey",
       fontFamily: "Inter",
       fontWeight: 300,
+    },
+    landingpageText: {
+      py: ".1em",
+      fontSize: "12px",
+      color: "darkGrey",
+      fontFamily: "Inter",
+      mb: "8px",
+      fontWeight: 300,
+      "& a": {
+        textDecoration: "none",
+        color: "darkGrey",
+        "&:hover": {
+          color: "primary",
+        },
+      },
     },
     termsLink: {
       textDecoration: "none",

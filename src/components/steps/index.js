@@ -14,7 +14,12 @@ const Steps = ({ product, regions, country, regionId }) => {
     return regions.find(r => r.id === regionId)
   }, [regions, regionId])
 
-  const loadingStates = ["creating_cart", "completing", "updating_cart"]
+  const loadingStates = [
+    "creating_cart",
+    "completing",
+    "adding_info",
+    "adding_shipping",
+  ]
 
   return (
     <Flex sx={{ flexDirection: "column" }}>

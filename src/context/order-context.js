@@ -246,18 +246,20 @@ export const OrderProvider = ({ children }) => {
   }
 
   const addShippingMethod = async shippingId => {
+    dispatch({ type: actions.SET_STATUS, payload: "adding_shipping" })
     return await client.carts
       .addShippingMethod(state.cart.id, {
         option_id: shippingId,
       })
       .then(({ cart }) => {
         dispatch({ type: actions.SET_CART, payload: cart })
+        dispatch({ type: actions.SET_STATUS, payload: "cart_updated" })
         return cart
       })
   }
 
   const setDetails = async (contact, delivery) => {
-    dispatch({ type: actions.SET_STATUS, payload: "updating_cart" })
+    dispatch({ type: actions.SET_STATUS, payload: "adding_info" })
     return await client.carts
       .update(state.cart.id, {
         email: contact.email,

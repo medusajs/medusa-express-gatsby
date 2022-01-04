@@ -3,6 +3,7 @@ import * as React from "react"
 import { Card, Flex, Image, Text } from "theme-ui"
 import Layout from "../components/layout/layout"
 import Github from "../images/github.png"
+import MedusaLogo from "../images/medusa-logo.png"
 
 const IndexPage = ({ data }) => {
   return (
@@ -15,29 +16,30 @@ const IndexPage = ({ data }) => {
                 mb: "16px",
                 width: "100%",
                 justifyContent: "center",
+                alignItems: "center",
                 display: "flex",
                 pb: "16px",
                 borderBottom: "1px solid #E5E7EB",
               }}
             >
-              Medusa{" "}
+              <Image src={MedusaLogo} sx={{ width: "110px" }} />
               <span style={{ fontStyle: "italic", marginLeft: "5px" }}>
                 Express
               </span>
             </Text>
-            <Text variant="summary" sx={{ mb: "8px", color: "#111827" }}>
-              What if we could buy and sell products via a URL link that sends
-              you directly to a check-out flow?
+            <Text variant="landingpageText" sx={{ color: "#111827" }}>
+              What if we could buy and sell products via a link that sends you
+              directly to a check-out flow?
             </Text>
-            <Text variant="summary" sx={{ mb: "8px" }}>
+            <Text variant="landingpageText">
               We've been experimenting with this idea and are now ready to
               preview a beta version.
             </Text>
-            <Text variant="summary" sx={{ mb: "16px" }}>
-              Imagine Stripe payment links - but open-source.
+            <Text variant="landingpageText" sx={{ mb: "16px" }}>
+              An open-source alternative to Stripe payment links.
             </Text>
             <Text
-              variant="summary"
+              variant="landingpageText"
               sx={{
                 mb: "16px",
                 color: "#3B82F6",
@@ -48,6 +50,53 @@ const IndexPage = ({ data }) => {
             >
               Explore the demo
             </Text>
+            <Flex
+              sx={{
+                borderTop: "1px solid #E5E7EB",
+                paddingTop: "8px",
+                flexDirection: "column",
+              }}
+            >
+              <Text
+                variant="landingpageText"
+                sx={{ my: "16px", color: "#111827", fontWeight: "600" }}
+              >
+                Get your own in only a couple of minutes
+              </Text>
+              <Text
+                variant="landingpageText"
+                sx={{ mb: "16px", color: "#111827" }}
+              >
+                <a
+                  href="https://github.com/medusajs/medusa#-quickstart"
+                  target="_blank"
+                >
+                  1. Create a Medusa server
+                </a>
+              </Text>
+              <Text
+                variant="landingpageText"
+                sx={{ mb: "16px", color: "#111827" }}
+              >
+                <a
+                  href="https://github.com/medusajs/medusa-express#-quick-start"
+                  target="_blank"
+                >
+                  2. Setup Medusa Express
+                </a>
+              </Text>
+              <Text
+                variant="landingpageText"
+                sx={{ mb: "16px", color: "#111827" }}
+              >
+                <a
+                  href="https://github.com/medusajs/admin#-quickstart"
+                  target="_blank"
+                >
+                  3. Add your own products with Medusa Admin
+                </a>
+              </Text>
+            </Flex>
             <Flex
               sx={{ width: "100%", justifyContent: "center" }}
               as="a"

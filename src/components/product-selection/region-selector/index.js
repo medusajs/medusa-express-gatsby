@@ -31,6 +31,7 @@ const RegionSelector = ({ selected, regions }) => {
       </Text>
       <Select
         value={selected}
+        id="region-select"
         onChange={handleChange}
         arrow={
           <Box
@@ -57,7 +58,7 @@ const RegionSelector = ({ selected, regions }) => {
           fontWeight: "bold",
           padding: 0,
           outline: "none",
-          textAlign: "center",
+          textAlign: "left",
         }}
       >
         {regions?.length &&

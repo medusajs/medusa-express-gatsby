@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react"
+import { Box, Flex, Text } from "@theme-ui/components"
+import React, { useContext, useEffect, useState } from "react"
 import OrderContext from "../../../context/order-context"
-import { Text, Box, Flex, Label, Radio, Select } from "@theme-ui/components"
 import { formatMoney } from "../../../utils/format-money"
 
 const ShippingOption = ({ selected, option, region, onClick }) => {
@@ -75,6 +75,12 @@ const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
     await addShippingMethod(id)
     setAdded("")
   }
+
+  useEffect(() => {
+    if (shipping?.length) {
+      handleClick(shipping[0].id)
+    }
+  }, [shipping])
 
   return (
     <Flex sx={{ flexDirection: "column" }}>
