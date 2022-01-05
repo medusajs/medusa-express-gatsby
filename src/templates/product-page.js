@@ -1,8 +1,9 @@
-import React from "react"
 import { graphql } from "gatsby"
-import { OrderProvider } from "../context/order-context"
+import React from "react"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import Steps from "../components/steps"
+import { OrderProvider } from "../context/order-context"
 
 const ProductPage = ({ data, pageContext }) => {
   const product = data.medusaProduct
@@ -13,6 +14,7 @@ const ProductPage = ({ data, pageContext }) => {
 
   return (
     <OrderProvider>
+      <SEO title={product.title} />
       <Layout regions={regions} country={pageContext.country}>
         <Steps
           product={product}
