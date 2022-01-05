@@ -26,10 +26,7 @@ const IndexPage = ({ data }) => {
                 borderBottom: "1px solid #E5E7EB",
               }}
             >
-              <Image src={MedusaLogo} sx={{ width: "110px" }} />
-              <span style={{ fontStyle: "italic", marginLeft: "5px" }}>
-                Express
-              </span>
+              <Image src={MedusaLogo} sx={{ width: "200px" }} />
             </Text>
             <Text variant="landingpageText" sx={{ color: "#111827" }}>
               What if we could buy and sell products via a link that sends you
@@ -113,14 +110,14 @@ const IndexPage = ({ data }) => {
               >
                 <Image
                   src={Github}
-                  sx={{ height: "25px", width: "25px", mx: [2] }}
+                  sx={{ height: "15px", width: "15px", mx: [2] }}
                 />
               </Flex>
               <Flex as="a" href="https://discord.gg/medusajs" target="_blank">
-                <Image src={Discord} sx={{ width: "25px", mx: [2] }} />
+                <Image src={Discord} sx={{ width: "15px", mx: [2] }} />
               </Flex>
               <Flex as="a" href="https://medusajs.com" target="_blank">
-                <Image src={MedusaMark} sx={{ height: "25px", mx: [2] }} />
+                <Image src={MedusaMark} sx={{ height: "15px", mx: [2] }} />
               </Flex>
             </Flex>
           </Flex>
