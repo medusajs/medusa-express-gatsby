@@ -113,10 +113,17 @@ exports.createSchemaCustomization = ({ actions }) => {
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
+  reporter,
 }) => {
   const products = await client.products
     .list()
     .then(response => response.products)
+    .catch(_ => {
+      reporter.panic(
+        "Could not fetch products from Medusa, please ensure that you have a Medusa server running and that you have set the correct BASE_URL in the client."
+      )
+      return
+    })
 
   for (const product of products) {
     createNode({
