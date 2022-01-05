@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://nextjs.org/">
-    <img alt="Next.js" src="https://i.imgur.com/Ey8OMA7.png" width="200" />
+  <a href="https://medusajs.com/">
+    <img alt="Medusa" src="https://i.imgur.com/Tk4Q9P3.png" width="200" />
   </a>
 </p>
 <h1 align="center">
