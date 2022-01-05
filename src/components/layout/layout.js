@@ -75,7 +75,7 @@ const Layout = ({ children, country, regions }) => {
                     lineHeight: "1",
                   }}
                 >
-                  medusa
+                  Medusa
                 </Text>
               </Flex>
             </Link>

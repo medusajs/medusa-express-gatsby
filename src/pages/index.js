@@ -5,7 +5,7 @@ import Layout from "../components/layout/layout"
 import Discord from "../images/discord.png"
 import Github from "../images/github.png"
 import MedusaMark from "../images/mark.png"
-import MedusaLogo from "../images/medusa-logo.png"
+import MedusaLogo from "../images/medusa.png"
 
 const IndexPage = ({ data }) => {
   return (
@@ -114,7 +114,7 @@ const IndexPage = ({ data }) => {
                 <Image src={Discord} sx={{ width: "25px", mx: [2] }} />
               </Flex>
               <Flex as="a" href="https://medusajs.com" target="_blank">
-                <Image src={MedusaMark} sx={{ width: "25px", mx: [2] }} />
+                <Image src={MedusaMark} sx={{ height: "25px", mx: [2] }} />
               </Flex>
             </Flex>
           </Flex>
