@@ -72,6 +72,7 @@ const IndexPage = ({ data }) => {
                 <a
                   href="https://github.com/medusajs/medusa#-quickstart"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   1. Create a Medusa server
                 </a>
@@ -83,6 +84,7 @@ const IndexPage = ({ data }) => {
                 <a
                   href="https://github.com/medusajs/medusa-express#-quick-start"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   2. Setup Medusa Express
                 </a>
@@ -94,6 +96,7 @@ const IndexPage = ({ data }) => {
                 <a
                   href="https://github.com/medusajs/admin#-quickstart"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   3. Add your own products with Medusa Admin
                 </a>
@@ -104,6 +107,7 @@ const IndexPage = ({ data }) => {
                 as="a"
                 href="https://github.com/medusajs/medusa-express"
                 target="_blank"
+                rel="noreferrer"
               >
                 <Image
                   src={Github}

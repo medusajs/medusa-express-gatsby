@@ -1,8 +1,8 @@
-import React from "react"
 import { graphql } from "gatsby"
-import { OrderProvider } from "../context/order-context"
+import React from "react"
 import Layout from "../components/layout"
 import Steps from "../components/steps"
+import { OrderProvider } from "../context/order-context"
 
 const ProductPage = ({ data, pageContext }) => {
   const product = data.medusaProduct
@@ -26,7 +26,7 @@ const ProductPage = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query ($handle: String!) {
+  query($handle: String!) {
     medusaProduct(handle: { eq: $handle }) {
       description
       discountable
@@ -47,6 +47,9 @@ export const query = graphql`
           value
           variant_id
         }
+      }
+      collection {
+        title
       }
       profile_id
       status

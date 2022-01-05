@@ -1,5 +1,115 @@
 const { client } = require("./src/utils/client")
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type MedusaProduct implements Node {
+      id: ID!
+      title: String!
+      subtitle: String
+      description: String
+      handle: String!
+      is_giftcard: Boolean!
+      status: String!
+      images: [MedusaImage]
+      thumbnail: String
+      options: [MedusaProductOption]!
+      variants: [MedusaProductVariant]!
+      collection: MedusaCollection
+      collection_id: String
+      profile_id: String!
+      discountable: Boolean!
+      published_at: Date!
+      created_at: Date!
+      updated_at: Date!
+      weight: Int
+      length: Int
+      width: Int
+    }
+    type MedusaCollection @dontInfer {
+      id: ID!
+      handle: String!
+      title: String!
+      created_at: Date!
+      updated_at: Date!
+    }
+    type MedusaProductOption @dontInfer {
+      id: ID!
+      title: String!
+      product_id: String!
+      values: [MedusaProductOptionValue]!
+      created_at: Date!
+      updated_at: Date!
+    }
+    type MedusaProductOptionValue @dontInfer {
+      id: ID!
+      value: String!
+      created_at: Date!
+      updated_at: Date!
+      option_id: String!
+      variant_id: String!
+    }
+    type MedusaProductVariant @dontInfer {
+      id: ID!
+      title: String!
+      product_id: String!
+      prices: [MedusaMoneyAmount]!
+      sku: String
+      barcode: String
+      upc: String
+      variant_rank: Int
+      inventory_quantity: Int!
+      allow_backorder: Boolean!
+      manage_inventory: Boolean!
+      hs_code: String
+      origin_country: String
+      mid_code: String
+      material: String
+      weight: Int
+      length: Int
+      height: Int
+      width: Int
+      options: [MedusaProductOptionValue]!
+      created_at: Date!
+      updated_at: Date!
+    }
+    type MedusaMoneyAmount @dontInfer {
+      id: ID!
+      amount: Int!
+      currency_code: String!
+      created_at: Date!
+      updated_at: Date!
+      variant_id: String!
+    }
+    type MedusaImage @dontInfer {
+      id: ID!
+      url: String!
+      created_at: Date!
+      updated_at: Date!
+    }
+    type MedusaRegion implements Node {
+      id: ID!
+      name: String!
+      tax_rate: Float!
+      currency_code: String!
+      created_at: Date!
+      updated_at: Date!
+      countries: [MedusaCountry]!
+    }
+    type MedusaCountry @dontInfer {
+      id: ID!
+      display_name: String!
+      iso_2: String!
+      iso_3: String!
+      name: String!
+      num_code: Int!
+      region_id: String!
+    }
+  `
+
+  createTypes(typeDefs)
+}
+
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
@@ -9,23 +119,9 @@ exports.sourceNodes = async ({
     .then(response => response.products)
 
   for (const product of products) {
-    // NEED OPTIONS ON DEFAULT RELATIONS
-
-    let { variants, ...rest } = product
-    let completeVariants = []
-
-    for (const variant of variants) {
-      const data = await client.products.variants
-        .retrieve(variant.id)
-        .then(response => response.variant)
-      completeVariants.push(data)
-    }
-
-    variants = completeVariants
-
     createNode({
-      variants,
-      ...rest,
+      ...product,
+      parent: null,
       children: [],
       internal: {
         type: "MedusaProduct",
@@ -39,6 +135,7 @@ exports.sourceNodes = async ({
   for (const region of regions) {
     createNode({
       ...region,
+      parent: null,
       children: [],
       internal: {
         type: "MedusaRegion",
