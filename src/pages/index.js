@@ -2,6 +2,7 @@ import { graphql, navigate } from "gatsby"
 import * as React from "react"
 import { Card, Flex, Image, Text } from "theme-ui"
 import Layout from "../components/layout/layout"
+import SEO from "../components/seo"
 import Discord from "../images/discord.png"
 import Github from "../images/github.png"
 import MedusaMark from "../images/mark.png"
@@ -10,6 +11,7 @@ import MedusaLogo from "../images/medusa.png"
 const IndexPage = ({ data }) => {
   return (
     <main>
+      <SEO title={"Medusa Express"} />
       <Layout>
         <Card variant="container">
           <Flex sx={{ flexDirection: "column" }}>
