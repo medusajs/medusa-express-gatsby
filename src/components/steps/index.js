@@ -18,6 +18,7 @@ const Steps = ({ product, regions, country, regionId }) => {
     cartStates.CREATING_CART,
     cartStates.COMPLETING,
     cartStates.ADDING_INFO,
+    cartStates.ADDING_SHIPPING,
   ]
 
   return (
