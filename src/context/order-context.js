@@ -263,12 +263,14 @@ export const OrderProvider = ({ children }) => {
   }
 
   const addShippingMethod = async shippingId => {
+    dispatch({ type: actions.SET_STATUS, payload: cartStates.ADDING_SHIPPING })
     return await client.carts
       .addShippingMethod(state.cart.id, {
         option_id: shippingId,
       })
       .then(({ cart }) => {
         dispatch({ type: actions.SET_CART, payload: cart })
+        dispatch({ type: actions.SET_STATUS, payload: null })
         return cart
       })
   }

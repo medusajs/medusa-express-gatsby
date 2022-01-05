@@ -70,6 +70,14 @@ const SelectShipping = ({ formik, value, name, set, placeholder, region }) => {
   const [added, setAdded] = useState("")
 
   const handleClick = async id => {
+    const alreadySelected = cart?.shipping_methods?.some(
+      so => id === so.shipping_option_id
+    )
+
+    if (alreadySelected) {
+      return
+    }
+
     setAdded(id)
     formik.setFieldValue(`${set}.${name}`, id)
     await addShippingMethod(id)
