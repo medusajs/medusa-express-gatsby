@@ -10,7 +10,7 @@ const Field = ({ formik, value, name, set, placeholder, disabled }) => {
     } else {
       setError(false)
     }
-  }, [formik.errors])
+  }, [formik.errors, formik.touched, set, name])
   return (
     <Flex
       sx={{

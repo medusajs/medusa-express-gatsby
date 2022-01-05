@@ -26,7 +26,7 @@ const Info = ({ product, region }) => {
             color: "#6B7280",
           }}
         >
-          {product?.collection || ""}
+          {product?.collection?.title || ""}
         </Text>
         <Text
           sx={{
