@@ -15,6 +15,11 @@ const Forms = ({ country, region, nextStep }) => {
     delivery: false,
   })
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    formik.submitForm()
+  }
+
   const formik = useFormik({
     initialValues: {
       contact: {
@@ -79,17 +84,7 @@ const Forms = ({ country, region, nextStep }) => {
       <Box>
         <>
           <Divider sx={{ color: "#E5E7EB", my: "16px" }} />
-          <Button
-            onClick={e => {
-              e.preventDefault()
-              formik.submitForm()
-            }}
-            variant="cta"
-            sx={{
-              cursor: "pointer",
-              width: "100%",
-            }}
-          >
+          <Button onClick={handleSubmit} variant="cta">
             Go to payment
           </Button>
         </>

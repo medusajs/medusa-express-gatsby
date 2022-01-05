@@ -22,6 +22,13 @@ const theme = {
     grey: "#E5E7EB",
     darkGrey: "#6B7280",
   },
+  layout: {
+    stepContainer: {
+      width: "100%",
+      height: "100%",
+      mb: "8px",
+    },
+  },
   cards: {
     accordionTrigger: {
       bg: "white",

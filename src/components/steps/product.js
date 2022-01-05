@@ -15,8 +15,15 @@ const Steps = ({
   const { cart } = useContext(OrderContext)
   const cartCreated = cart?.id
 
+  let triggerStyles = {}
+
+  if (cartCreated) {
+    triggerStyles.color = "darkgrey"
+    triggerStyles.cursor = "pointer"
+  }
+
   return (
-    <Flex sx={{ width: "100%", height: "100%", mb: "8px" }}>
+    <Flex variant="layout.stepContainer">
       {activeStep === "product" ? (
         <Card variant="container">
           <ProductSelection
@@ -31,7 +38,7 @@ const Steps = ({
         <Card
           variant="accordionTrigger"
           onClick={() => setActiveStep("product")}
-          sx={cartCreated && { color: "darkgrey" }}
+          sx={triggerStyles}
         >
           Product
           {cartCreated && <Image src={Checkmark} />}

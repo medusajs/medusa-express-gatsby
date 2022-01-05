@@ -1,6 +1,6 @@
 import { Flex } from "@theme-ui/components"
 import React, { useContext, useMemo, useState } from "react"
-import OrderContext from "../../context/order-context"
+import OrderContext, { cartStates } from "../../context/order-context"
 import Spinner from "../spinner/spinner"
 import Payment from "./payment"
 import Product from "./product"
@@ -15,10 +15,9 @@ const Steps = ({ product, regions, country, regionId }) => {
   }, [regions, regionId])
 
   const loadingStates = [
-    "creating_cart",
-    "completing",
-    "adding_info",
-    "adding_shipping",
+    cartStates.CREATING_CART,
+    cartStates.COMPLETING,
+    cartStates.ADDING_INFO,
   ]
 
   return (

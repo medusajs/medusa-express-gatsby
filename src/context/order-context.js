@@ -19,6 +19,18 @@ const actions = {
   SET_STATUS: "SET_STATUS",
 }
 
+export const cartStates = {
+  CREATING_CART: "creating_cart",
+  CART_CREATED: "cart_created",
+  ADDING_INFO: "adding_info",
+  INFO_ADDED: "info_added",
+  ADDING_SHIPPING: "adding_shipping",
+  HAS_SHIPPING: "has_shipping",
+  COMPLETING: "completing",
+  COMPLETED: "completed",
+  COMPLETION_FAILED: "completion_failed",
+}
+
 export const defaultOrderContext = {
   selectedRegion: {
     tax_rate: 0,
@@ -155,7 +167,10 @@ export const OrderProvider = ({ children }) => {
 
   const completeOrder = async () => {
     if (state.cart && state.cart.id) {
-      dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+      dispatch({
+        type: actions.SET_ORDER_STATUS,
+        payload: cartStates.COMPLETING,
+      })
 
       try {
         await client.carts.setPaymentSession(state.cart.id, {
@@ -168,7 +183,7 @@ export const OrderProvider = ({ children }) => {
             if (type === "order") {
               dispatch({
                 type: actions.SET_ORDER_STATUS,
-                payload: "completed",
+                payload: cartStates.COMPLETED,
               })
               dispatch({ type: actions.SET_ORDER, payload: data })
             }
@@ -176,14 +191,14 @@ export const OrderProvider = ({ children }) => {
       } catch (err) {
         dispatch({
           type: actions.SET_ORDER_STATUS,
-          payload: "completion_failed",
+          payload: cartStates.COMPLETION_FAILED,
         })
       }
     }
   }
 
   const setOrderCompleting = () => {
-    dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+    dispatch({ type: actions.SET_ORDER_STATUS, payload: cartStates.COMPLETING })
   }
 
   const setCountryName = countryName => {
@@ -206,7 +221,7 @@ export const OrderProvider = ({ children }) => {
     const { variant, quantity } = state
 
     if (variant.id) {
-      dispatch({ type: actions.SET_STATUS, payload: "creating_cart" })
+      dispatch({ type: actions.SET_STATUS, payload: cartStates.CREATING_CART })
       const { id } = await client.carts
         .create({
           region_id: region,
@@ -223,7 +238,7 @@ export const OrderProvider = ({ children }) => {
         .createPaymentSessions(id)
         .then(({ cart }) => cart)
 
-      dispatch({ type: actions.SET_STATUS, payload: "cart_created" })
+      dispatch({ type: actions.SET_STATUS, payload: cartStates.CART_CREATED })
 
       dispatch({ type: actions.SET_CART, payload: cart })
     }
@@ -246,20 +261,18 @@ export const OrderProvider = ({ children }) => {
   }
 
   const addShippingMethod = async shippingId => {
-    dispatch({ type: actions.SET_STATUS, payload: "adding_shipping" })
     return await client.carts
       .addShippingMethod(state.cart.id, {
         option_id: shippingId,
       })
       .then(({ cart }) => {
         dispatch({ type: actions.SET_CART, payload: cart })
-        dispatch({ type: actions.SET_STATUS, payload: "cart_updated" })
         return cart
       })
   }
 
   const setDetails = async (contact, delivery) => {
-    dispatch({ type: actions.SET_STATUS, payload: "adding_info" })
+    dispatch({ type: actions.SET_STATUS, payload: cartStates.ADDING_INFO })
     return await client.carts
       .update(state.cart.id, {
         email: contact.email,
@@ -276,7 +289,7 @@ export const OrderProvider = ({ children }) => {
       })
       .then(({ cart }) => {
         dispatch({ type: actions.SET_CART, payload: cart })
-        dispatch({ type: actions.SET_STATUS, payload: "cart_updated" })
+        dispatch({ type: actions.SET_STATUS, payload: cartStates.HAS_SHIPPING })
         return cart
       })
   }

@@ -2,7 +2,9 @@ import { graphql, navigate } from "gatsby"
 import * as React from "react"
 import { Card, Flex, Image, Text } from "theme-ui"
 import Layout from "../components/layout/layout"
+import Discord from "../images/discord.png"
 import Github from "../images/github.png"
+import MedusaMark from "../images/mark.png"
 import MedusaLogo from "../images/medusa-logo.png"
 
 const IndexPage = ({ data }) => {
@@ -65,7 +67,7 @@ const IndexPage = ({ data }) => {
               </Text>
               <Text
                 variant="landingpageText"
-                sx={{ mb: "16px", color: "#111827" }}
+                sx={{ mb: "16px", "& a": { color: "#111827" } }}
               >
                 <a
                   href="https://github.com/medusajs/medusa#-quickstart"
@@ -76,7 +78,7 @@ const IndexPage = ({ data }) => {
               </Text>
               <Text
                 variant="landingpageText"
-                sx={{ mb: "16px", color: "#111827" }}
+                sx={{ mb: "16px", "& a": { color: "#111827" } }}
               >
                 <a
                   href="https://github.com/medusajs/medusa-express#-quick-start"
@@ -87,7 +89,7 @@ const IndexPage = ({ data }) => {
               </Text>
               <Text
                 variant="landingpageText"
-                sx={{ mb: "16px", color: "#111827" }}
+                sx={{ mb: "16px", "& a": { color: "#111827" } }}
               >
                 <a
                   href="https://github.com/medusajs/admin#-quickstart"
@@ -97,13 +99,23 @@ const IndexPage = ({ data }) => {
                 </a>
               </Text>
             </Flex>
-            <Flex
-              sx={{ width: "100%", justifyContent: "center" }}
-              as="a"
-              href="https://github.com/medusajs/medusa-express"
-              target="_blank"
-            >
-              <Image src={Github} sx={{ height: "25px", width: "25px" }} />
+            <Flex sx={{ width: "100%", justifyContent: "center", mt: [3] }}>
+              <Flex
+                as="a"
+                href="https://github.com/medusajs/medusa-express"
+                target="_blank"
+              >
+                <Image
+                  src={Github}
+                  sx={{ height: "25px", width: "25px", mx: [2] }}
+                />
+              </Flex>
+              <Flex as="a" href="https://discord.gg/medusajs" target="_blank">
+                <Image src={Discord} sx={{ width: "25px", mx: [2] }} />
+              </Flex>
+              <Flex as="a" href="https://medusajs.com" target="_blank">
+                <Image src={MedusaMark} sx={{ width: "25px", mx: [2] }} />
+              </Flex>
             </Flex>
           </Flex>
         </Card>

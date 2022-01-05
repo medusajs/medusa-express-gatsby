@@ -1,5 +1,5 @@
-import React from "react"
 import { Box } from "@theme-ui/components"
+import React from "react"
 
 const Spinner = ({ done = false }) => {
   if (done) {

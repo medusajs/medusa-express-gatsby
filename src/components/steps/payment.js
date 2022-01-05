@@ -58,7 +58,7 @@ const Payment = ({ region, country, activeStep }) => {
   }, [order?.id, shouldNavigate])
 
   return (
-    <Flex sx={{ width: "100%", height: "100%", mb: "8px" }}>
+    <Flex variant="layout.stepContainer">
       {activeStep === "payment" ? (
         <Card variant="container">
           <Text variant="header3">Payment</Text>
