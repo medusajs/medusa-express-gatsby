@@ -18,7 +18,7 @@ const Layout = ({ children, country, regions }) => {
           alignItems: "center",
           flexDirection: ["column", "row"],
           minHeight: "100vh",
-          paddingTop: "2em",
+          py: "2em",
         }}
       >
         <Flex

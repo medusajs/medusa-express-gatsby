@@ -147,6 +147,8 @@ const reducer = (state, action) => {
         ...state,
         cart: action.payload,
       }
+    default:
+      break
   }
 }
 

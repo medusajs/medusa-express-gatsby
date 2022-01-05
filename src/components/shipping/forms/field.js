@@ -1,10 +1,8 @@
+import { Flex, Input } from "@theme-ui/components"
 import React, { useEffect, useState } from "react"
-import { Input, Flex } from "@theme-ui/components"
 
 const Field = ({ formik, value, name, set, placeholder, disabled }) => {
   const [error, setError] = useState(false)
-
-  const placeholderColor = "#BBBBBB"
 
   useEffect(() => {
     if (formik.errors[set]?.[name] && formik.touched[set]?.[name]) {

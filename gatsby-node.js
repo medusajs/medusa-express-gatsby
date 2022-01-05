@@ -6,7 +6,7 @@ exports.sourceNodes = async ({
 }) => {
   const products = await client.products
     .list()
-    .then((response) => response.products)
+    .then(response => response.products)
 
   for (const product of products) {
     // NEED OPTIONS ON DEFAULT RELATIONS
@@ -17,7 +17,7 @@ exports.sourceNodes = async ({
     for (const variant of variants) {
       const data = await client.products.variants
         .retrieve(variant.id)
-        .then((response) => response.variant)
+        .then(response => response.variant)
       completeVariants.push(data)
     }
 
@@ -73,7 +73,7 @@ exports.createPages = async function ({ actions, graphql }) {
 
   const [first] = data.allMedusaRegion.edges
 
-  data.allMedusaProduct.edges.forEach((edge) => {
+  data.allMedusaProduct.edges.forEach(edge => {
     const handle = edge.node.handle
     if (handle) {
       actions.createPage({
@@ -86,7 +86,7 @@ exports.createPages = async function ({ actions, graphql }) {
         },
       })
 
-      data.allMedusaRegion.edges.forEach((edge) => {
+      data.allMedusaRegion.edges.forEach(edge => {
         const { id: regionId, countries } = edge.node
         for (const { iso_2 } of countries) {
           actions.createPage({

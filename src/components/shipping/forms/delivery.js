@@ -5,15 +5,8 @@ import Field from "./field"
 import FieldSplitter from "./field-splitter"
 import SelectShipping from "./select-shipping"
 
-const Delivery = ({
-  formik,
-  isValid,
-  setIsValid,
-  region,
-  country,
-  summarize,
-}) => {
-  const { delivery, setCountryName } = useContext(OrderContext)
+const Delivery = ({ formik, region, country }) => {
+  const { setCountryName } = useContext(OrderContext)
   const [fullCountry, setFullCountry] = useState("")
   useEffect(() => {
     formik.setFieldValue("delivery.country_code", country)

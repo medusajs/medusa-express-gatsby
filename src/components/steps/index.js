@@ -42,7 +42,6 @@ const Steps = ({ product, regions, country, regionId }) => {
       <Product
         region={selectedRegion}
         regions={regions}
-        region={selectedRegion}
         product={product}
         setActiveStep={setActiveStep}
         activeStep={activeStep}

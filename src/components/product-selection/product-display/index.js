@@ -3,7 +3,7 @@ import React from "react"
 import Info from "./info"
 import OptionSelector from "./option-selector"
 
-const ProductDisplay = ({ showSpinner, region, product }) => {
+const ProductDisplay = ({ region, product }) => {
   return product ? (
     <Flex sx={{ flexDirection: "column" }}>
       <Flex sx={{ flexDirection: "row", width: "100%", height: "100%" }}>

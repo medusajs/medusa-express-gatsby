@@ -1,18 +1,8 @@
 import { Flex, Text } from "@theme-ui/components"
 import moment from "moment"
-import React, { useState } from "react"
-import { client } from "../../utils/client"
+import React from "react"
 
 const OrderConfirmation = ({ order }) => {
-  const [country, setCountry] = useState(undefined)
-
-  client.regions.retrieve(order.region_id).then(({ region }) => {
-    const res = region.countries.find(
-      c => c.iso_2 === order.shipping_address.country_code
-    ).name
-    setCountry(res)
-  })
-
   const customerName =
     !order.customer.first_name || !order.customer.last_name
       ? `${order.shipping_address.first_name} ${order.shipping_address.last_name}`

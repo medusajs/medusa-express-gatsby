@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from "react"
 import OrderContext from "../../context/order-context"
 
 const Review = () => {
-  const { cart, destroyCart } = useContext(OrderContext)
+  const { cart } = useContext(OrderContext)
   const item = useMemo(() => {
     return cart.items[0]
   }, [cart.items])

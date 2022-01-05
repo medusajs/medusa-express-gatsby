@@ -1,10 +1,10 @@
+import { Box, Flex, Text } from "@theme-ui/components"
 import React, { useContext } from "react"
-import { Box, Text, Flex, Button } from "@theme-ui/components"
-import Field from "./field"
 import OrderContext from "../../../context/order-context"
+import Field from "./field"
 import FieldSplitter from "./field-splitter"
 
-const Contact = ({ formik, isValid, setIsValid, summarize = false }) => {
+const Contact = ({ formik, summarize = false }) => {
   const { contact } = useContext(OrderContext)
 
   return (

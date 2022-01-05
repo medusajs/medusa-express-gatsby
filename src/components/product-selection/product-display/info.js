@@ -1,7 +1,5 @@
-import React, { useContext } from "react"
-import { Button, Flex, Text } from "@theme-ui/components"
-import OptionSelector from "./option-selector"
-import OrderContext from "../../../context/order-context"
+import { Flex, Text } from "@theme-ui/components"
+import React from "react"
 import { getFrom } from "../../../utils/get-from"
 
 const Info = ({ product, region }) => {
@@ -28,7 +26,7 @@ const Info = ({ product, region }) => {
             color: "#6B7280",
           }}
         >
-          {product?.collection || "Bathrobes"}
+          {product?.collection || ""}
         </Text>
         <Text
           sx={{
