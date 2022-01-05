@@ -20,7 +20,7 @@ const Logo = () => {
 
 export const MedusaLogo = () => {
   return (
-    <Box sx={{ marginRight: "10px", height: "28px" }}>
+    <Box sx={{ marginRight: "4px", height: "16px", width: "15px" }}>
       <Image
         src={medusaSmall}
         sx={{

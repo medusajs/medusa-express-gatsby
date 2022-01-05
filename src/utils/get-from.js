@@ -5,7 +5,7 @@ export const getFrom = (
   const prices = []
 
   for (const variant of variants) {
-    const price = variant.prices.find((p) => p.currency_code === currency_code)
+    const price = variant.prices.find(p => p.currency_code === currency_code)
     if (price) {
       prices.push(price.amount)
     }

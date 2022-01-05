@@ -1,5 +1,4 @@
-import React, { useReducer, useEffect } from "react"
-
+import React, { useEffect, useReducer } from "react"
 import { client } from "../utils/client"
 
 const actions = {
@@ -18,6 +17,18 @@ const actions = {
   SET_ORDER: "SET_ORDER",
   SET_ORDER_STATUS: "SET_ORDER_STATUS",
   SET_STATUS: "SET_STATUS",
+}
+
+export const cartStates = {
+  CREATING_CART: "creating_cart",
+  CART_CREATED: "cart_created",
+  ADDING_INFO: "adding_info",
+  INFO_ADDED: "info_added",
+  ADDING_SHIPPING: "adding_shipping",
+  HAS_SHIPPING: "has_shipping",
+  COMPLETING: "completing",
+  COMPLETED: "completed",
+  COMPLETION_FAILED: "completion_failed",
 }
 
 export const defaultOrderContext = {
@@ -46,7 +57,7 @@ export const defaultOrderContext = {
   },
   shipping: [],
   selectRegion: () => {},
-  selectVariant: (_) => {},
+  selectVariant: _ => {},
   updateQuantity: () => {},
   createCart: async () => {},
   setContact: () => {},
@@ -136,6 +147,8 @@ const reducer = (state, action) => {
         ...state,
         cart: action.payload,
       }
+    default:
+      break
   }
 }
 
@@ -156,7 +169,10 @@ export const OrderProvider = ({ children }) => {
 
   const completeOrder = async () => {
     if (state.cart && state.cart.id) {
-      dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+      dispatch({
+        type: actions.SET_ORDER_STATUS,
+        payload: cartStates.COMPLETING,
+      })
 
       try {
         await client.carts.setPaymentSession(state.cart.id, {
@@ -166,37 +182,40 @@ export const OrderProvider = ({ children }) => {
         return await client.carts
           .complete(state.cart.id)
           .then(({ data, type }) => {
-            dispatch({ type: actions.SET_ORDER_STATUS, payload: "completed" })
             if (type === "order") {
+              dispatch({
+                type: actions.SET_ORDER_STATUS,
+                payload: cartStates.COMPLETED,
+              })
               dispatch({ type: actions.SET_ORDER, payload: data })
             }
           })
       } catch (err) {
         dispatch({
           type: actions.SET_ORDER_STATUS,
-          payload: "completion_failed",
+          payload: cartStates.COMPLETION_FAILED,
         })
       }
     }
   }
 
   const setOrderCompleting = () => {
-    dispatch({ type: actions.SET_ORDER_STATUS, payload: "completing" })
+    dispatch({ type: actions.SET_ORDER_STATUS, payload: cartStates.COMPLETING })
   }
 
-  const setCountryName = (countryName) => {
+  const setCountryName = countryName => {
     dispatch({ type: actions.SET_COUNTRY, payload: countryName })
   }
 
-  const selectRegion = (region) => {
+  const selectRegion = region => {
     dispatch({ type: actions.SET_REGION, payload: region })
   }
 
-  const selectVariant = (id) => {
+  const selectVariant = id => {
     dispatch({ type: actions.SET_VARIANT, payload: id })
   }
 
-  const updateQuantity = (quantity) => {
+  const updateQuantity = quantity => {
     dispatch({ type: actions.UPDATE_QUANTITY, payload: quantity })
   }
 
@@ -204,7 +223,7 @@ export const OrderProvider = ({ children }) => {
     const { variant, quantity } = state
 
     if (variant.id) {
-      dispatch({ type: actions.SET_STATUS, payload: "creating_cart" })
+      dispatch({ type: actions.SET_STATUS, payload: cartStates.CREATING_CART })
       const { id } = await client.carts
         .create({
           region_id: region,
@@ -221,17 +240,17 @@ export const OrderProvider = ({ children }) => {
         .createPaymentSessions(id)
         .then(({ cart }) => cart)
 
-      dispatch({ type: actions.SET_STATUS, payload: "cart_created" })
+      dispatch({ type: actions.SET_STATUS, payload: cartStates.CART_CREATED })
 
       dispatch({ type: actions.SET_CART, payload: cart })
     }
   }
 
-  const setContact = (contact) => {
+  const setContact = contact => {
     dispatch({ type: actions.SET_CONTACT, payload: contact })
   }
 
-  const setDelivery = (delivery) => {
+  const setDelivery = delivery => {
     dispatch({ type: actions.SET_DELIVERY, payload: delivery })
   }
 
@@ -243,7 +262,7 @@ export const OrderProvider = ({ children }) => {
     dispatch({ type: actions.DESTROY_CART })
   }
 
-  const addShippingMethod = async (shippingId) => {
+  const addShippingMethod = async shippingId => {
     return await client.carts
       .addShippingMethod(state.cart.id, {
         option_id: shippingId,
@@ -255,6 +274,7 @@ export const OrderProvider = ({ children }) => {
   }
 
   const setDetails = async (contact, delivery) => {
+    dispatch({ type: actions.SET_STATUS, payload: cartStates.ADDING_INFO })
     return await client.carts
       .update(state.cart.id, {
         email: contact.email,
@@ -271,6 +291,7 @@ export const OrderProvider = ({ children }) => {
       })
       .then(({ cart }) => {
         dispatch({ type: actions.SET_CART, payload: cart })
+        dispatch({ type: actions.SET_STATUS, payload: cartStates.HAS_SHIPPING })
         return cart
       })
   }
