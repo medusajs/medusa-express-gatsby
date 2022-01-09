@@ -35,15 +35,15 @@ Medusa is an open-source headless commerce engine that enables developers to cre
 ### 1. Create your Medusa Express project
 
 ```zsh  
-  gatsby new medusa-express https://github.com/medusajs/medusa-express
+  gatsby new medusa-express https://github.com/medusajs/medusa-express-gatsby
   
   # or with npx
   
-  npx gatsby new medusa-express https://github.com/medusajs/medusa-express
+  npx gatsby new medusa-express https://github.com/medusajs/medusa-express-gatsby
   
   # or via Git
 
-  git clone https://github.com/medusajs/medusa-express.git medusa-express
+  git clone https://github.com/medusajs/medusa-express-gatsby.git medusa-express
 ```
 
 ### 2. Install dependencies
